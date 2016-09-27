@@ -29,5 +29,13 @@
   </context-param>
   <listener>
     <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
-  </listener>
+  </listener> 
+  <servlet>
+    <servlet-name>ControladorTicket</servlet-name>
+    <servlet-class>Controladores.ControladorTicket</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControladorTicket</servlet-name>
+    <url-pattern>/ControladorTicket</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -2,27 +2,17 @@ package DataTypes;
 
 import java.sql.Date;
 
-public class Ticket {
-	private int ticketNro;
+public class TicketVentaEntrada {
 	private String matricula;
 	private Date fchHraVenta;
 	private Date fchHraEst;
 	private int cantMin;
-	private float impTotal;
-	private int codAnul;
-	private int fchHraAnul;
 	private int agenciaNro;
 
-	public Ticket() {
+	public TicketVentaEntrada() {
 		
 	}
 	
-	public int getTicketNro() {
-		return ticketNro;
-	}
-	public void setTicketNro(int ticketNro) {
-		this.ticketNro = ticketNro;
-	}
 	public String getMatricula() {
 		return matricula;
 	}
@@ -46,24 +36,6 @@ public class Ticket {
 	}
 	public void setCantMin(int cantMin) {
 		this.cantMin = cantMin;
-	}
-	public float getImpTotal() {
-		return impTotal;
-	}
-	public void setImpTotal(float impTotal) {
-		this.impTotal = impTotal;
-	}
-	public int getCodAnul() {
-		return codAnul;
-	}
-	public void setCodAnul(int codAnul) {
-		this.codAnul = codAnul;
-	}
-	public int getFchHraAnul() {
-		return fchHraAnul;
-	}
-	public void setFchHraAnul(int fchHraAnul) {
-		this.fchHraAnul = fchHraAnul;
 	}
 	
 	public int getAgenciaNro() {
