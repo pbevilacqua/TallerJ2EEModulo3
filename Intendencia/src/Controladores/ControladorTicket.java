@@ -31,6 +31,8 @@ public class ControladorTicket {
 
 			tvs.setImpTotal(ticket.getImpTotal());
 			tvs.setTicketNro(ticket.getTicketNro());
+			tvs.getMensaje().setCodigo(0);
+			tvs.getMensaje().setMensaje("Ticket vendido con exito");
 			
 			return tvs;
 		} catch (Exception e) {
