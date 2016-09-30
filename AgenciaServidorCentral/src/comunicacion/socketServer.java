@@ -111,7 +111,7 @@ public class socketServer {
 								comando =  st.nextToken();
 								tve.setCantMin(Integer.parseInt(comando));
 								//SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-								//tve.setFchHraEst(df.parse(msg[3]));									
+								//tve.setFchHraEst(df.parse(msg[3]));								
 								//tve.setFchHraVenta(new Date());							
 								ControladorTicketProxy ctp = new ControladorTicketProxy();
 								TicketVentaSalida tvs = new TicketVentaSalida();

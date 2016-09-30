@@ -33,12 +33,13 @@ public class ControladorDB {
 			DataSource ds = (DataSource) initialContext.lookup("java:/MySQL_IMMDS");
 			con = ds.getConnection();
 
-			Class.forName("com.mysql.jdbc.Driver");
+			//Class.forName("com.mysql.jdbc.Driver");
 		} catch (SQLException e) {
 			System.out.println("Se produjo un error al conectar con la base de datos SQL");
-		} catch (ClassNotFoundException e) {
-			System.out.println("ClassNotFoundException: " + e.getMessage());
-		} catch (Exception e) {
+		} //catch (ClassNotFoundException e) {
+			//System.out.println("ClassNotFoundException: " + e.getMessage());
+		//} 
+		catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
 		}
 		return con;
