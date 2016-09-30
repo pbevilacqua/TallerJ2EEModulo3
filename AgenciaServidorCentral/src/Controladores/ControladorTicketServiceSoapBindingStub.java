@@ -66,13 +66,6 @@ public class ControladorTicketServiceSoapBindingStub extends org.apache.axis.cli
             java.lang.Class simpledf = org.apache.axis.encoding.ser.SimpleDeserializerFactory.class;
             java.lang.Class simplelistsf = org.apache.axis.encoding.ser.SimpleListSerializerFactory.class;
             java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
-            qName = new javax.xml.namespace.QName("http://Controladores/", "date");
-            cachedSerQNames.add(qName);
-            cls = Controladores.Date.class;
-            cachedSerClasses.add(cls);
-            cachedSerFactories.add(beansf);
-            cachedDeserFactories.add(beandf);
-
             qName = new javax.xml.namespace.QName("http://Controladores/", "mensaje");
             cachedSerQNames.add(qName);
             cls = Controladores.Mensaje.class;

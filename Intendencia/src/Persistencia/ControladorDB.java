@@ -49,14 +49,15 @@ public class ControladorDB {
 		PreparedStatement pstmt = null;
 		try {
 			con = establecerConexion();
-			String insertQuery = "INSERT INTO Ticket (TicketNro,Matricula,FchHraVenta,CantMin,ImpTotal,AgenciaNro) VALUES(?,?,?,?,?,?);";
+			String insertQuery = "INSERT INTO Ticket (TicketNro,Matricula,FchHraVenta,FchHraEst,CantMin,ImpTotal,AgenciaNro) VALUES(?,?,?,?,?,?,?);";
 			pstmt = con.prepareStatement(insertQuery,Statement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, 0);
 			pstmt.setString(2, ticket.getMatricula());
 			pstmt.setDate(3, ticket.getFchHraVenta());
-			pstmt.setInt(4, ticket.getCantMin());
-			pstmt.setFloat(5, ticket.getImpTotal());
-			pstmt.setInt(6, ticket.getAgenciaNro());
+			pstmt.setDate(4, ticket.getFchHraEst());
+			pstmt.setInt(5, ticket.getCantMin());
+			pstmt.setFloat(6, ticket.getImpTotal());
+			pstmt.setInt(7, ticket.getAgenciaNro());
 
 			int i = pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();

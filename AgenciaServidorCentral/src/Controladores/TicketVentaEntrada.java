@@ -12,9 +12,9 @@ public class TicketVentaEntrada  implements java.io.Serializable {
 
     private int cantMin;
 
-    private Controladores.Date fchHraEst;
+    private java.lang.String fchHraEst;
 
-    private Controladores.Date fchHraVenta;
+    private java.lang.String fchHraVenta;
 
     private java.lang.String matricula;
 
@@ -24,8 +24,8 @@ public class TicketVentaEntrada  implements java.io.Serializable {
     public TicketVentaEntrada(
            int agenciaNro,
            int cantMin,
-           Controladores.Date fchHraEst,
-           Controladores.Date fchHraVenta,
+           java.lang.String fchHraEst,
+           java.lang.String fchHraVenta,
            java.lang.String matricula) {
            this.agenciaNro = agenciaNro;
            this.cantMin = cantMin;
@@ -80,7 +80,7 @@ public class TicketVentaEntrada  implements java.io.Serializable {
      * 
      * @return fchHraEst
      */
-    public Controladores.Date getFchHraEst() {
+    public java.lang.String getFchHraEst() {
         return fchHraEst;
     }
 
@@ -90,7 +90,7 @@ public class TicketVentaEntrada  implements java.io.Serializable {
      * 
      * @param fchHraEst
      */
-    public void setFchHraEst(Controladores.Date fchHraEst) {
+    public void setFchHraEst(java.lang.String fchHraEst) {
         this.fchHraEst = fchHraEst;
     }
 
@@ -100,7 +100,7 @@ public class TicketVentaEntrada  implements java.io.Serializable {
      * 
      * @return fchHraVenta
      */
-    public Controladores.Date getFchHraVenta() {
+    public java.lang.String getFchHraVenta() {
         return fchHraVenta;
     }
 
@@ -110,7 +110,7 @@ public class TicketVentaEntrada  implements java.io.Serializable {
      * 
      * @param fchHraVenta
      */
-    public void setFchHraVenta(Controladores.Date fchHraVenta) {
+    public void setFchHraVenta(java.lang.String fchHraVenta) {
         this.fchHraVenta = fchHraVenta;
     }
 
@@ -204,14 +204,14 @@ public class TicketVentaEntrada  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("fchHraEst");
         elemField.setXmlName(new javax.xml.namespace.QName("", "fchHraEst"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://Controladores/", "date"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "anySimpleType"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("fchHraVenta");
         elemField.setXmlName(new javax.xml.namespace.QName("", "fchHraVenta"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://Controladores/", "date"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "anySimpleType"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
