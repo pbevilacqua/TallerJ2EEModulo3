@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
@@ -110,9 +112,12 @@ public class socketServer {
 								tve.setMatricula(comando);
 								comando =  st.nextToken();
 								tve.setCantMin(Integer.parseInt(comando));
-								//SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-								//tve.setFchHraEst(df.parse(msg[3]));								
-								//tve.setFchHraVenta(new Date());							
+								
+								comando =  st.nextToken();
+								tve.setFchHraEst(comando);
+								SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+								Date fecha = new Date();
+								tve.setFchHraVenta(df.format(fecha));							
 								ControladorTicketProxy ctp = new ControladorTicketProxy();
 								TicketVentaSalida tvs = new TicketVentaSalida();
 								tvs = ctp.venderTicket(tve);
