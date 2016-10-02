@@ -1,9 +1,8 @@
 eclipse.preferences.version=1
-encoding//src/WebServiceClient/ControladorTicket.java=UTF-8
-encoding//src/WebServiceClient/ControladorTicketService.java=UTF-8
-encoding//src/WebServiceClient/ControladorTicketServiceLocator.java=UTF-8
-encoding//src/WebServiceClient/ControladorTicketServiceSoapBindingStub.java=UTF-8
-encoding//src/WebServiceClient/Date.java=UTF-8
-encoding//src/WebServiceClient/Mensaje.java=UTF-8
-encoding//src/WebServiceClient/TicketVentaEntrada.java=UTF-8
-encoding//src/WebServiceClient/TicketVentaSalida.java=UTF-8
+encoding//src/Controladores/ControladorTicket.java=UTF-8
+encoding//src/Controladores/ControladorTicketService.java=UTF-8
+encoding//src/Controladores/ControladorTicketServiceLocator.java=UTF-8
+encoding//src/Controladores/ControladorTicketServiceSoapBindingStub.java=UTF-8
+encoding//src/Controladores/Mensaje.java=UTF-8
+encoding//src/Controladores/TicketVentaEntrada.java=UTF-8
+encoding//src/Controladores/TicketVentaSalida.java=UTF-8
