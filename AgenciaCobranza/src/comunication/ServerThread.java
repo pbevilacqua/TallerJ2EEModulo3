@@ -11,6 +11,7 @@ import java.util.logging.*;
 import Controladores.ControladorTicketProxy;
 import Controladores.TicketVentaEntrada;
 import Controladores.TicketVentaSalida;
+
 public class ServerThread extends Thread {
     private Socket socket;
     private DataOutputStream out;
@@ -76,10 +77,6 @@ public class ServerThread extends Thread {
         String mensaje = "";
         try {
         	mensaje = in.readUTF();
-//            if(mensaje.equals("hola")){
-//                System.out.println("El cliente con idSesion "+this.idSessio+" saluda");
-//                out.writeUTF("adios");
-//            }
         
         	if (mensaje!= null){
         		StringTokenizer st = new StringTokenizer(mensaje,"|");
@@ -105,15 +102,20 @@ public class ServerThread extends Thread {
         				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         				Date fecha = new Date();
         				//tve.setFchHraVenta(df.format(fecha));	
-        				tve.setFchHraVenta("2016-10-01T22:22:22");
+        				tve.setFchHraVenta("2016-10-02T15:22:22");
         				ControladorTicketProxy ctp = new ControladorTicketProxy();
         				TicketVentaSalida tvs = new TicketVentaSalida();
         				tvs = ctp.venderTicket(tve);
 
         				System.out.println("Info del ticket");
-        				System.out.println(tvs.getImpTotal());
         				System.out.println(tvs.getTicketNro());
-        				System.out.println(tvs.getMensaje());
+        				System.out.println(tvs.getImpTotal());
+        				
+        				System.out.println(tvs.getMensaje().getMensaje());
+        				
+        				mensaje = "Compra|"+tvs.getTicketNro()+"|"+tvs.getImpTotal()+"|"+tve.getFchHraVenta()+"|"+tvs.getMensaje().getMensaje();
+        				
+        				
         			}
         			else 
         			{

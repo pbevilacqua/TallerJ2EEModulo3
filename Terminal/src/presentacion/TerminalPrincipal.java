@@ -20,7 +20,7 @@ public class TerminalPrincipal {
     
     public TerminalPrincipal(){
  
-        JFrame jfM = new JFrame("Terminal 1!!");  
+        JFrame jfM = new JFrame("Terminal Agencia Cobranza");  
         jfM.setLayout(null);
         bordJP(); //invoca el metodo que contiene el panel
         jp_principal.setBounds(10, 10, 780, 680);

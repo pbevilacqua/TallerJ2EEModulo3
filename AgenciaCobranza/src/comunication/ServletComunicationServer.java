@@ -41,9 +41,6 @@ public class ServletComunicationServer extends HttpServlet {
                 Socket socket;
                 socket = ss.accept();
                 System.out.println("Nueva conexión entrante: "+socket);
-//                ServerThread st = new ServerThread(socket, idSession);
-//                st.start();
-//                st.run();
                 ((ServerThread) new ServerThread(socket, idSession)).start();
                 idSession++;
             }
