@@ -1,95 +1,71 @@
 /**
- * TicketVentaSalida.java
+ * Mensaje.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package Controladores;
+package webServices;
 
-public class TicketVentaSalida  implements java.io.Serializable {
-    private float impTotal;
+public class Mensaje  implements java.io.Serializable {
+    private int codigo;
 
-    private Controladores.Mensaje mensaje;
+    private java.lang.String mensaje;
 
-    private int ticketNro;
-
-    public TicketVentaSalida() {
+    public Mensaje() {
     }
 
-    public TicketVentaSalida(
-           float impTotal,
-           Controladores.Mensaje mensaje,
-           int ticketNro) {
-           this.impTotal = impTotal;
+    public Mensaje(
+           int codigo,
+           java.lang.String mensaje) {
+           this.codigo = codigo;
            this.mensaje = mensaje;
-           this.ticketNro = ticketNro;
     }
 
 
     /**
-     * Gets the impTotal value for this TicketVentaSalida.
+     * Gets the codigo value for this Mensaje.
      * 
-     * @return impTotal
+     * @return codigo
      */
-    public float getImpTotal() {
-        return impTotal;
+    public int getCodigo() {
+        return codigo;
     }
 
 
     /**
-     * Sets the impTotal value for this TicketVentaSalida.
+     * Sets the codigo value for this Mensaje.
      * 
-     * @param impTotal
+     * @param codigo
      */
-    public void setImpTotal(float impTotal) {
-        this.impTotal = impTotal;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
 
     /**
-     * Gets the mensaje value for this TicketVentaSalida.
+     * Gets the mensaje value for this Mensaje.
      * 
      * @return mensaje
      */
-    public Controladores.Mensaje getMensaje() {
+    public java.lang.String getMensaje() {
         return mensaje;
     }
 
 
     /**
-     * Sets the mensaje value for this TicketVentaSalida.
+     * Sets the mensaje value for this Mensaje.
      * 
      * @param mensaje
      */
-    public void setMensaje(Controladores.Mensaje mensaje) {
+    public void setMensaje(java.lang.String mensaje) {
         this.mensaje = mensaje;
-    }
-
-
-    /**
-     * Gets the ticketNro value for this TicketVentaSalida.
-     * 
-     * @return ticketNro
-     */
-    public int getTicketNro() {
-        return ticketNro;
-    }
-
-
-    /**
-     * Sets the ticketNro value for this TicketVentaSalida.
-     * 
-     * @param ticketNro
-     */
-    public void setTicketNro(int ticketNro) {
-        this.ticketNro = ticketNro;
     }
 
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
-        if (!(obj instanceof TicketVentaSalida)) return false;
-        TicketVentaSalida other = (TicketVentaSalida) obj;
+        if (!(obj instanceof Mensaje)) return false;
+        Mensaje other = (Mensaje) obj;
         if (obj == null) return false;
         if (this == obj) return true;
         if (__equalsCalc != null) {
@@ -98,11 +74,10 @@ public class TicketVentaSalida  implements java.io.Serializable {
         __equalsCalc = obj;
         boolean _equals;
         _equals = true && 
-            this.impTotal == other.getImpTotal() &&
+            this.codigo == other.getCodigo() &&
             ((this.mensaje==null && other.getMensaje()==null) || 
              (this.mensaje!=null &&
-              this.mensaje.equals(other.getMensaje()))) &&
-            this.ticketNro == other.getTicketNro();
+              this.mensaje.equals(other.getMensaje())));
         __equalsCalc = null;
         return _equals;
     }
@@ -114,38 +89,31 @@ public class TicketVentaSalida  implements java.io.Serializable {
         }
         __hashCodeCalc = true;
         int _hashCode = 1;
-        _hashCode += new Float(getImpTotal()).hashCode();
+        _hashCode += getCodigo();
         if (getMensaje() != null) {
             _hashCode += getMensaje().hashCode();
         }
-        _hashCode += getTicketNro();
         __hashCodeCalc = false;
         return _hashCode;
     }
 
     // Type metadata
     private static org.apache.axis.description.TypeDesc typeDesc =
-        new org.apache.axis.description.TypeDesc(TicketVentaSalida.class, true);
+        new org.apache.axis.description.TypeDesc(Mensaje.class, true);
 
     static {
-        typeDesc.setXmlType(new javax.xml.namespace.QName("http://Controladores/", "ticketVentaSalida"));
+        typeDesc.setXmlType(new javax.xml.namespace.QName("http://Controladores/", "mensaje"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("impTotal");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "impTotal"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "float"));
+        elemField.setFieldName("codigo");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "codigo"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("mensaje");
         elemField.setXmlName(new javax.xml.namespace.QName("", "mensaje"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://Controladores/", "mensaje"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
-        elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("ticketNro");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "ticketNro"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }

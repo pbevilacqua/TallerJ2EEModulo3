@@ -8,9 +8,9 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.logging.*;
 
-import Controladores.ControladorTicketProxy;
-import Controladores.TicketVentaEntrada;
-import Controladores.TicketVentaSalida;
+import webServices.ControladorTicketProxy;
+import webServices.TicketVentaEntrada;
+import webServices.TicketVentaSalida;
 
 public class ServerThread extends Thread {
     private Socket socket;

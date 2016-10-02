@@ -5,9 +5,9 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package Controladores;
+package webServices;
 
-public class ControladorTicketServiceLocator extends org.apache.axis.client.Service implements Controladores.ControladorTicketService {
+public class ControladorTicketServiceLocator extends org.apache.axis.client.Service implements webServices.ControladorTicketService {
 
     public ControladorTicketServiceLocator() {
     }
@@ -39,7 +39,7 @@ public class ControladorTicketServiceLocator extends org.apache.axis.client.Serv
         ControladorTicketPortWSDDServiceName = name;
     }
 
-    public Controladores.ControladorTicket getControladorTicketPort() throws javax.xml.rpc.ServiceException {
+    public webServices.ControladorTicket getControladorTicketPort() throws javax.xml.rpc.ServiceException {
        java.net.URL endpoint;
         try {
             endpoint = new java.net.URL(ControladorTicketPort_address);
@@ -50,9 +50,9 @@ public class ControladorTicketServiceLocator extends org.apache.axis.client.Serv
         return getControladorTicketPort(endpoint);
     }
 
-    public Controladores.ControladorTicket getControladorTicketPort(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+    public webServices.ControladorTicket getControladorTicketPort(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
         try {
-            Controladores.ControladorTicketServiceSoapBindingStub _stub = new Controladores.ControladorTicketServiceSoapBindingStub(portAddress, this);
+            webServices.ControladorTicketServiceSoapBindingStub _stub = new webServices.ControladorTicketServiceSoapBindingStub(portAddress, this);
             _stub.setPortName(getControladorTicketPortWSDDServiceName());
             return _stub;
         }
@@ -72,8 +72,8 @@ public class ControladorTicketServiceLocator extends org.apache.axis.client.Serv
      */
     public java.rmi.Remote getPort(Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         try {
-            if (Controladores.ControladorTicket.class.isAssignableFrom(serviceEndpointInterface)) {
-                Controladores.ControladorTicketServiceSoapBindingStub _stub = new Controladores.ControladorTicketServiceSoapBindingStub(new java.net.URL(ControladorTicketPort_address), this);
+            if (webServices.ControladorTicket.class.isAssignableFrom(serviceEndpointInterface)) {
+                webServices.ControladorTicketServiceSoapBindingStub _stub = new webServices.ControladorTicketServiceSoapBindingStub(new java.net.URL(ControladorTicketPort_address), this);
                 _stub.setPortName(getControladorTicketPortWSDDServiceName());
                 return _stub;
             }

@@ -5,9 +5,9 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package Controladores;
+package webServices;
 
-public class ControladorTicketServiceSoapBindingStub extends org.apache.axis.client.Stub implements Controladores.ControladorTicket {
+public class ControladorTicketServiceSoapBindingStub extends org.apache.axis.client.Stub implements webServices.ControladorTicket {
     private java.util.Vector cachedSerClasses = new java.util.Vector();
     private java.util.Vector cachedSerQNames = new java.util.Vector();
     private java.util.Vector cachedSerFactories = new java.util.Vector();
@@ -25,11 +25,11 @@ public class ControladorTicketServiceSoapBindingStub extends org.apache.axis.cli
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("venderTicket");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "arg0"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://Controladores/", "ticketVentaEntrada"), Controladores.TicketVentaEntrada.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "arg0"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://Controladores/", "ticketVentaEntrada"), webServices.TicketVentaEntrada.class, false, false);
         param.setOmittable(true);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://Controladores/", "ticketVentaSalida"));
-        oper.setReturnClass(Controladores.TicketVentaSalida.class);
+        oper.setReturnClass(webServices.TicketVentaSalida.class);
         oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
@@ -68,21 +68,21 @@ public class ControladorTicketServiceSoapBindingStub extends org.apache.axis.cli
             java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
             qName = new javax.xml.namespace.QName("http://Controladores/", "mensaje");
             cachedSerQNames.add(qName);
-            cls = Controladores.Mensaje.class;
+            cls = webServices.Mensaje.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://Controladores/", "ticketVentaEntrada");
             cachedSerQNames.add(qName);
-            cls = Controladores.TicketVentaEntrada.class;
+            cls = webServices.TicketVentaEntrada.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://Controladores/", "ticketVentaSalida");
             cachedSerQNames.add(qName);
-            cls = Controladores.TicketVentaSalida.class;
+            cls = webServices.TicketVentaSalida.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
@@ -153,7 +153,7 @@ public class ControladorTicketServiceSoapBindingStub extends org.apache.axis.cli
         }
     }
 
-    public Controladores.TicketVentaSalida venderTicket(Controladores.TicketVentaEntrada arg0) throws java.rmi.RemoteException {
+    public webServices.TicketVentaSalida venderTicket(webServices.TicketVentaEntrada arg0) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -177,9 +177,9 @@ public class ControladorTicketServiceSoapBindingStub extends org.apache.axis.cli
         else {
             extractAttachments(_call);
             try {
-                return (Controladores.TicketVentaSalida) _resp;
+                return (webServices.TicketVentaSalida) _resp;
             } catch (java.lang.Exception _exception) {
-                return (Controladores.TicketVentaSalida) org.apache.axis.utils.JavaUtils.convert(_resp, Controladores.TicketVentaSalida.class);
+                return (webServices.TicketVentaSalida) org.apache.axis.utils.JavaUtils.convert(_resp, webServices.TicketVentaSalida.class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {

@@ -1,71 +1,95 @@
 /**
- * Mensaje.java
+ * TicketVentaSalida.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package Controladores;
+package webServices;
 
-public class Mensaje  implements java.io.Serializable {
-    private int codigo;
+public class TicketVentaSalida  implements java.io.Serializable {
+    private float impTotal;
 
-    private java.lang.String mensaje;
+    private webServices.Mensaje mensaje;
 
-    public Mensaje() {
+    private int ticketNro;
+
+    public TicketVentaSalida() {
     }
 
-    public Mensaje(
-           int codigo,
-           java.lang.String mensaje) {
-           this.codigo = codigo;
+    public TicketVentaSalida(
+           float impTotal,
+           webServices.Mensaje mensaje,
+           int ticketNro) {
+           this.impTotal = impTotal;
            this.mensaje = mensaje;
+           this.ticketNro = ticketNro;
     }
 
 
     /**
-     * Gets the codigo value for this Mensaje.
+     * Gets the impTotal value for this TicketVentaSalida.
      * 
-     * @return codigo
+     * @return impTotal
      */
-    public int getCodigo() {
-        return codigo;
+    public float getImpTotal() {
+        return impTotal;
     }
 
 
     /**
-     * Sets the codigo value for this Mensaje.
+     * Sets the impTotal value for this TicketVentaSalida.
      * 
-     * @param codigo
+     * @param impTotal
      */
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setImpTotal(float impTotal) {
+        this.impTotal = impTotal;
     }
 
 
     /**
-     * Gets the mensaje value for this Mensaje.
+     * Gets the mensaje value for this TicketVentaSalida.
      * 
      * @return mensaje
      */
-    public java.lang.String getMensaje() {
+    public webServices.Mensaje getMensaje() {
         return mensaje;
     }
 
 
     /**
-     * Sets the mensaje value for this Mensaje.
+     * Sets the mensaje value for this TicketVentaSalida.
      * 
      * @param mensaje
      */
-    public void setMensaje(java.lang.String mensaje) {
+    public void setMensaje(webServices.Mensaje mensaje) {
         this.mensaje = mensaje;
+    }
+
+
+    /**
+     * Gets the ticketNro value for this TicketVentaSalida.
+     * 
+     * @return ticketNro
+     */
+    public int getTicketNro() {
+        return ticketNro;
+    }
+
+
+    /**
+     * Sets the ticketNro value for this TicketVentaSalida.
+     * 
+     * @param ticketNro
+     */
+    public void setTicketNro(int ticketNro) {
+        this.ticketNro = ticketNro;
     }
 
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
-        if (!(obj instanceof Mensaje)) return false;
-        Mensaje other = (Mensaje) obj;
+        if (!(obj instanceof TicketVentaSalida)) return false;
+        TicketVentaSalida other = (TicketVentaSalida) obj;
         if (obj == null) return false;
         if (this == obj) return true;
         if (__equalsCalc != null) {
@@ -74,10 +98,11 @@ public class Mensaje  implements java.io.Serializable {
         __equalsCalc = obj;
         boolean _equals;
         _equals = true && 
-            this.codigo == other.getCodigo() &&
+            this.impTotal == other.getImpTotal() &&
             ((this.mensaje==null && other.getMensaje()==null) || 
              (this.mensaje!=null &&
-              this.mensaje.equals(other.getMensaje())));
+              this.mensaje.equals(other.getMensaje()))) &&
+            this.ticketNro == other.getTicketNro();
         __equalsCalc = null;
         return _equals;
     }
@@ -89,31 +114,38 @@ public class Mensaje  implements java.io.Serializable {
         }
         __hashCodeCalc = true;
         int _hashCode = 1;
-        _hashCode += getCodigo();
+        _hashCode += new Float(getImpTotal()).hashCode();
         if (getMensaje() != null) {
             _hashCode += getMensaje().hashCode();
         }
+        _hashCode += getTicketNro();
         __hashCodeCalc = false;
         return _hashCode;
     }
 
     // Type metadata
     private static org.apache.axis.description.TypeDesc typeDesc =
-        new org.apache.axis.description.TypeDesc(Mensaje.class, true);
+        new org.apache.axis.description.TypeDesc(TicketVentaSalida.class, true);
 
     static {
-        typeDesc.setXmlType(new javax.xml.namespace.QName("http://Controladores/", "mensaje"));
+        typeDesc.setXmlType(new javax.xml.namespace.QName("http://Controladores/", "ticketVentaSalida"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("codigo");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "codigo"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setFieldName("impTotal");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "impTotal"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "float"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("mensaje");
         elemField.setXmlName(new javax.xml.namespace.QName("", "mensaje"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://Controladores/", "mensaje"));
         elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("ticketNro");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "ticketNro"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }

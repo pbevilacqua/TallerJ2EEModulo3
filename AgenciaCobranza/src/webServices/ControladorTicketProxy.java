@@ -1,8 +1,8 @@
-package Controladores;
+package webServices;
 
-public class ControladorTicketProxy implements Controladores.ControladorTicket {
+public class ControladorTicketProxy implements webServices.ControladorTicket {
   private String _endpoint = null;
-  private Controladores.ControladorTicket controladorTicket = null;
+  private webServices.ControladorTicket controladorTicket = null;
   
   public ControladorTicketProxy() {
     _initControladorTicketProxy();
@@ -15,7 +15,7 @@ public class ControladorTicketProxy implements Controladores.ControladorTicket {
   
   private void _initControladorTicketProxy() {
     try {
-      controladorTicket = (new Controladores.ControladorTicketServiceLocator()).getControladorTicketPort();
+      controladorTicket = (new webServices.ControladorTicketServiceLocator()).getControladorTicketPort();
       if (controladorTicket != null) {
         if (_endpoint != null)
           ((javax.xml.rpc.Stub)controladorTicket)._setProperty("javax.xml.rpc.service.endpoint.address", _endpoint);
@@ -38,13 +38,13 @@ public class ControladorTicketProxy implements Controladores.ControladorTicket {
     
   }
   
-  public Controladores.ControladorTicket getControladorTicket() {
+  public webServices.ControladorTicket getControladorTicket() {
     if (controladorTicket == null)
       _initControladorTicketProxy();
     return controladorTicket;
   }
   
-  public Controladores.TicketVentaSalida venderTicket(Controladores.TicketVentaEntrada arg0) throws java.rmi.RemoteException{
+  public webServices.TicketVentaSalida venderTicket(webServices.TicketVentaEntrada arg0) throws java.rmi.RemoteException{
     if (controladorTicket == null)
       _initControladorTicketProxy();
     return controladorTicket.venderTicket(arg0);
