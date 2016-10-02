@@ -33,7 +33,7 @@ public class ProcesarMensaje {
 		socketClient sc= socketClient.getInstance();
 		String mensaje = sc.enviarMensaje(msg);
 		
-		//mensaje = "Compra|"+tvs.getTicketNro()+"|"+tvs.getImpTotal()+"|"+"tvs.getFecha()"+"|"+tvs.getMensaje();
+		//mensaje = "Compra|"+tvs.getTicketNro()+"|"+tvs.getImpTotal()+"|"+tve.getFchHraVenta()+"|"+tvs.getMensaje().getCodigo()+"|"+tvs.getMensaje().getMensaje();
 		
 		  try {
 	        	if (mensaje!= null){
@@ -48,8 +48,16 @@ public class ProcesarMensaje {
 	        				comando =  st.nextToken();
 	        				tvs.setFecha(comando);
 	        				comando =  st.nextToken();
+	        				int codigoError = Integer.valueOf(comando);
+	        				comando = st.nextToken();
 	        				tvs.setMensaje(comando);
-
+	        				
+	        				
+	        				// Si el codigo de error del mensaje es ok grabar el ticket en la base de datos de la agencia.
+	        				if (codigoError == 0){
+	        					System.out.println("DEBO GUARDAR EN BASE DE DATOS");
+	        				}
+	        				
 	        				System.out.println("Info de la respuesta de compra ticket");
 	        				System.out.println(tvs.getTicketNro());
 	        				System.out.println(tvs.getImpTotal());

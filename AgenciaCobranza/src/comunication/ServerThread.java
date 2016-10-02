@@ -110,10 +110,10 @@ public class ServerThread extends Thread {
         				System.out.println("Info del ticket");
         				System.out.println(tvs.getTicketNro());
         				System.out.println(tvs.getImpTotal());
-        				
+        				System.out.println(tvs.getMensaje().getCodigo());
         				System.out.println(tvs.getMensaje().getMensaje());
         				
-        				mensaje = "Compra|"+tvs.getTicketNro()+"|"+tvs.getImpTotal()+"|"+tve.getFchHraVenta()+"|"+tvs.getMensaje().getMensaje();
+        				mensaje = "Compra|"+tvs.getTicketNro()+"|"+tvs.getImpTotal()+"|"+tve.getFchHraVenta()+"|"+tvs.getMensaje().getCodigo()+"|"+tvs.getMensaje().getMensaje();
         				
         				
         			}
