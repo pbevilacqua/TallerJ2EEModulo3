@@ -4,7 +4,9 @@ import java.util.Date;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import DataTypes.Mensaje;
 import DataTypes.Ticket;
+import DataTypes.TicketAnulSalida;
 import DataTypes.TicketVentaEntrada;
 import DataTypes.TicketVentaSalida;
 import Persistencia.ControladorDB;
@@ -48,6 +50,29 @@ public class ControladorTicket {
 			e.printStackTrace();
 		}
 		return tvs;
+	}
+	
+	@WebMethod
+	public TicketAnulSalida anulacionTicket(int nroTicket, int nroAgencia){
+		TicketAnulSalida tas = new TicketAnulSalida();
+		
+
+		ControladorDB cdb = ControladorDB.getControladorDB();
+		Ticket ticket = new Ticket();
+		ticket.setAgenciaNro(nroAgencia);
+		ticket.setTicketNro(nroTicket);
+		
+		Mensaje mensaje = new Mensaje();
+		
+		cdb.anularTicket(ticket, mensaje);
+		
+		if (ticket.getCodAnul() > 0){
+			tas.setCodAnul(ticket.getCodAnul());
+			tas.setFchHraAnul(new Date(ticket.getFchHraAnul().getTime()));
+		}
+		tas.setMensaje(mensaje);
+		
+		return tas;
 	}
 
 }
