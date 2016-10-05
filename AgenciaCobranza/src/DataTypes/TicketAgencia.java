@@ -1,13 +1,13 @@
 package DataTypes;
 
-import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.GregorianCalendar;
 
 
 public class TicketAgencia {
 	private int TicketNro;
 	private String matricula;
-	private XMLGregorianCalendar fchHraVenta;
-	private XMLGregorianCalendar fchHraEst;
+	private GregorianCalendar fchHraVenta;
+	private GregorianCalendar fchHraEst;
 	private int cantMin;
 	private float ImpTotal;
 	private int TerminalNro;
@@ -22,16 +22,16 @@ public class TicketAgencia {
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
-	public XMLGregorianCalendar getFchHraVenta() {
+	public GregorianCalendar getFchHraVenta() {
 		return fchHraVenta;
 	}
-	public void setFchHraVenta(XMLGregorianCalendar fchHraVenta) {
+	public void setFchHraVenta(GregorianCalendar fchHraVenta) {
 		this.fchHraVenta = fchHraVenta;
 	}
-	public XMLGregorianCalendar getFchHraEst() {
+	public GregorianCalendar getFchHraEst() {
 		return fchHraEst;
 	}
-	public void setFchHraEst(XMLGregorianCalendar fchHraEst) {
+	public void setFchHraEst(GregorianCalendar fchHraEst) {
 		this.fchHraEst = fchHraEst;
 	}
 	public int getCantMin() {

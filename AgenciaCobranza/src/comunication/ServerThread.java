@@ -12,6 +12,7 @@ import java.util.StringTokenizer;
 import java.util.logging.*;
 
 import DataTypes.*;
+import controladorAgencia.ControladorAgencia;
 import webServices.ControladorTicketProxy;
 import webServices.TicketVentaEntrada;
 import webServices.TicketVentaSalida;
@@ -115,15 +116,15 @@ public class ServerThread extends Thread {
 						Date parsed = df.parse(comando);
 						System.out.println("parsed date: " + parsed);
 
-						Calendar newCalendar = Calendar.getInstance();
-						newCalendar.setTime(parsed);
+						GregorianCalendar gCFchEst = new GregorianCalendar(); //Calendar.getInstance();
+						gCFchEst.setTime(parsed);
 						
 						
-						tve.setFchHraEst(newCalendar);
+						tve.setFchHraEst(gCFchEst);
 
-						Calendar fecha = new GregorianCalendar();
-						tve.setFchHraVenta(fecha);	
-						Date d = fecha.getTime();
+						GregorianCalendar gCFchVen = new GregorianCalendar();
+						tve.setFchHraVenta(gCFchVen);	
+						Date d = gCFchVen.getTime();
         				
         				ControladorTicketProxy ctp = new ControladorTicketProxy();
         				TicketVentaSalida tvs = new TicketVentaSalida();
@@ -144,8 +145,15 @@ public class ServerThread extends Thread {
         					TicketAgencia ta = new TicketAgencia();
         					ta.setTicketNro(tvs.getTicketNro());
         					ta.setMatricula(tve.getMatricula());
-        					//ta.setFchHraVenta(tve.getFchHraVenta());
-        					//TicketNro,Matricula,FchHraVenta,FchHraEst,CantMin,ImpTotal,TerminalNro
+        					ta.setFchHraVenta(gCFchVen);
+        					ta.setFchHraEst(gCFchEst);
+        					ta.setCantMin(tve.getCantMin());
+        					ta.setImpTotal(tvs.getImpTotal());
+        					ta.setTerminalNro(1);
+        					
+        					ControladorAgencia ca = new ControladorAgencia();
+        					ca.venderTicket(ta);
+        					
         				}
         				
         				
