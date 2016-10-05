@@ -99,7 +99,7 @@ public class ServerThread extends Thread {
         				comando =  st.nextToken();
         				tve.setCantMin(Integer.parseInt(comando));
 
-//        				comando =  st.nextToken();
+        				comando =  st.nextToken();
 //        				//tve.setFchHraEst(comando);
 //        				tve.setFchHraEst("2016-10-01T23:00:00");
 //        				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");

@@ -10,7 +10,7 @@ public class Ticket {
 	private int cantMin;
 	private float impTotal;
 	private int codAnul;
-	private int fchHraAnul;
+	private Date fchHraAnul;
 	private int agenciaNro;
 
 	public Ticket() {
@@ -59,10 +59,10 @@ public class Ticket {
 	public void setCodAnul(int codAnul) {
 		this.codAnul = codAnul;
 	}
-	public int getFchHraAnul() {
+	public Date getFchHraAnul() {
 		return fchHraAnul;
 	}
-	public void setFchHraAnul(int fchHraAnul) {
+	public void setFchHraAnul(Date fchHraAnul) {
 		this.fchHraAnul = fchHraAnul;
 	}
 	
