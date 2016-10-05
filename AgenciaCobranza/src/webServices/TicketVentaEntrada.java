@@ -12,9 +12,9 @@ public class TicketVentaEntrada  implements java.io.Serializable {
 
     private int cantMin;
 
-    private java.lang.String fchHraEst;
+    private java.util.Calendar fchHraEst;
 
-    private java.lang.String fchHraVenta;
+    private java.util.Calendar fchHraVenta;
 
     private java.lang.String matricula;
 
@@ -24,8 +24,8 @@ public class TicketVentaEntrada  implements java.io.Serializable {
     public TicketVentaEntrada(
            int agenciaNro,
            int cantMin,
-           java.lang.String fchHraEst,
-           java.lang.String fchHraVenta,
+           java.util.Calendar fchHraEst,
+           java.util.Calendar fchHraVenta,
            java.lang.String matricula) {
            this.agenciaNro = agenciaNro;
            this.cantMin = cantMin;
@@ -80,7 +80,7 @@ public class TicketVentaEntrada  implements java.io.Serializable {
      * 
      * @return fchHraEst
      */
-    public java.lang.String getFchHraEst() {
+    public java.util.Calendar getFchHraEst() {
         return fchHraEst;
     }
 
@@ -90,7 +90,7 @@ public class TicketVentaEntrada  implements java.io.Serializable {
      * 
      * @param fchHraEst
      */
-    public void setFchHraEst(java.lang.String fchHraEst) {
+    public void setFchHraEst(java.util.Calendar fchHraEst) {
         this.fchHraEst = fchHraEst;
     }
 
@@ -100,7 +100,7 @@ public class TicketVentaEntrada  implements java.io.Serializable {
      * 
      * @return fchHraVenta
      */
-    public java.lang.String getFchHraVenta() {
+    public java.util.Calendar getFchHraVenta() {
         return fchHraVenta;
     }
 
@@ -110,7 +110,7 @@ public class TicketVentaEntrada  implements java.io.Serializable {
      * 
      * @param fchHraVenta
      */
-    public void setFchHraVenta(java.lang.String fchHraVenta) {
+    public void setFchHraVenta(java.util.Calendar fchHraVenta) {
         this.fchHraVenta = fchHraVenta;
     }
 
@@ -204,14 +204,14 @@ public class TicketVentaEntrada  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("fchHraEst");
         elemField.setXmlName(new javax.xml.namespace.QName("", "fchHraEst"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "anySimpleType"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "dateTime"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("fchHraVenta");
         elemField.setXmlName(new javax.xml.namespace.QName("", "fchHraVenta"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "anySimpleType"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "dateTime"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
