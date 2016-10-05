@@ -29,6 +29,8 @@ public class ServerThread extends Thread {
         this.socket = socket;
        // this.idSession = id;
         try {
+        	
+        	
             out = new DataOutputStream(socket.getOutputStream());
             in = new DataInputStream(socket.getInputStream());
             
@@ -101,7 +103,7 @@ public class ServerThread extends Thread {
         				comando =  st.nextToken();
         				tve.setCantMin(Integer.parseInt(comando));
 
-//        				comando =  st.nextToken();
+        				comando =  st.nextToken();
 //        				//tve.setFchHraEst(comando);
 //        				tve.setFchHraEst("2016-10-01T23:00:00");
 //        				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
@@ -121,6 +123,7 @@ public class ServerThread extends Thread {
 
 						Calendar fecha = new GregorianCalendar();
 						tve.setFchHraVenta(fecha);	
+						Date d = fecha.getTime();
         				
         				ControladorTicketProxy ctp = new ControladorTicketProxy();
         				TicketVentaSalida tvs = new TicketVentaSalida();
@@ -132,13 +135,16 @@ public class ServerThread extends Thread {
         				System.out.println(tvs.getMensaje().getCodigo());
         				System.out.println(tvs.getMensaje().getMensaje());
         				
-        				mensaje = "Compra|"+tvs.getTicketNro()+"|"+tvs.getImpTotal()+"|"+tve.getFchHraVenta()+"|"+tvs.getMensaje().getCodigo()+"|"+tvs.getMensaje().getMensaje();
+        				mensaje = "Compra|"+tvs.getTicketNro()+"|"+tvs.getImpTotal()+"|"+d+"|"+tvs.getMensaje().getCodigo()+"|"+tvs.getMensaje().getMensaje();
         				
 
         				// Si el codigo de error del mensaje es ok grabar el ticket en la base de datos de la agencia.
         				if (tvs.getMensaje().getCodigo() == 0){
         					System.out.println("DEBO GUARDAR EN BASE DE DATOS");
         					TicketAgencia ta = new TicketAgencia();
+        					ta.setTicketNro(tvs.getTicketNro());
+        					ta.setMatricula(tve.getMatricula());
+        					//ta.setFchHraVenta(tve.getFchHraVenta());
         					//TicketNro,Matricula,FchHraVenta,FchHraEst,CantMin,ImpTotal,TerminalNro
         				}
         				
