@@ -2,8 +2,11 @@ package comunication;
 
 import java.io.*;
 import java.net.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.logging.*;
@@ -96,13 +99,27 @@ public class ServerThread extends Thread {
         				comando =  st.nextToken();
         				tve.setCantMin(Integer.parseInt(comando));
 
-        				comando =  st.nextToken();
-        				//tve.setFchHraEst(comando);
-        				tve.setFchHraEst("2016-10-01T23:00:00");
+//        				comando =  st.nextToken();
+//        				//tve.setFchHraEst(comando);
+//        				tve.setFchHraEst("2016-10-01T23:00:00");
+//        				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+//        				Date fecha = new Date();
+//        				//tve.setFchHraVenta(df.format(fecha));	
+//        				tve.setFchHraVenta("2016-10-02T15:22:22");
+        				
         				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-        				Date fecha = new Date();
-        				//tve.setFchHraVenta(df.format(fecha));	
-        				tve.setFchHraVenta("2016-10-02T15:22:22");
+						Date parsed = df.parse(comando);
+						System.out.println("parsed date: " + parsed);
+
+						Calendar newCalendar = Calendar.getInstance();
+						newCalendar.setTime(parsed);
+						
+						
+						tve.setFchHraEst(newCalendar);
+
+						Calendar fecha = new GregorianCalendar();
+						tve.setFchHraVenta(fecha);	
+        				
         				ControladorTicketProxy ctp = new ControladorTicketProxy();
         				TicketVentaSalida tvs = new TicketVentaSalida();
         				tvs = ctp.venderTicket(tve);
@@ -129,7 +146,7 @@ public class ServerThread extends Thread {
 
         	out.writeUTF(mensaje);
         	System.out.println(mensaje);
-        } catch (IOException ex) {
+        } catch (IOException | ParseException ex) {
             Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
         }
         desconnectar();

@@ -1,5 +1,6 @@
 package Controladores;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.jws.WebMethod;
@@ -25,9 +26,13 @@ public class ControladorTicket {
 			ticket.setAgenciaNro(tve.getAgenciaNro());
 			ticket.setCantMin(tve.getCantMin());
 			
+			Date date = tve.getFchHraEst().getTime();
+			java.sql.Date sqldate = new java.sql.Date(date.getTime());
+			ticket.setFchHraEst(sqldate);
 			
-			ticket.setFchHraEst(new java.sql.Date(tve.getFchHraEst().toGregorianCalendar().getTime().getTime()));
-			ticket.setFchHraVenta(new java.sql.Date(tve.getFchHraVenta().toGregorianCalendar().getTime().getTime()));
+			date = tve.getFchHraVenta().getTime();
+			sqldate = new java.sql.Date(date.getTime());
+			ticket.setFchHraVenta(sqldate);
 
 			ticket.setMatricula(tve.getMatricula());
 			
