@@ -53,11 +53,6 @@ public class ProcesarMensaje {
 	        				tvs.setMensaje(comando);
 	        				
 	        				
-	        				// Si el codigo de error del mensaje es ok grabar el ticket en la base de datos de la agencia.
-	        				if (codigoError == 0){
-	        					System.out.println("DEBO GUARDAR EN BASE DE DATOS");
-	        				}
-	        				
 	        				System.out.println("Info de la respuesta de compra ticket");
 	        				System.out.println(tvs.getTicketNro());
 	        				System.out.println(tvs.getImpTotal());

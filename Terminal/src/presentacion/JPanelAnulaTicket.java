@@ -20,7 +20,7 @@ import utilidades.*;
 public class JPanelAnulaTicket extends JPanel {
 
 	//private int nroDeSocio;
-	private JTextField campoMatricula;
+	private JTextField campoTicket;
 	private JTextField campoCantMin;
 	private JLabel mensaje; 
 
@@ -41,7 +41,7 @@ public class JPanelAnulaTicket extends JPanel {
 
 		setLayout(null);
 
-		JLabel lbltitulo = new JLabel("Ticket a anular");
+		JLabel lbltitulo = new JLabel("Anular Ticket");
 		lbltitulo.setBounds(32, 10, 150, 32);
 		add(lbltitulo);
 
@@ -51,16 +51,13 @@ public class JPanelAnulaTicket extends JPanel {
 		add(mensaje);
 
 
-		campoMatricula = new JTextField();
-		campoMatricula.setColumns(50);
-		campoMatricula.setBounds(240, 56, 324, 20);
-		add(campoMatricula);
+		campoTicket = new JTextField();
+		campoTicket.setColumns(50);
+		campoTicket.setBounds(240, 56, 324, 20);
+		add(campoTicket);
 
 
-		campoCantMin = new JTextField();
-		campoCantMin.setColumns(10);
-		campoCantMin.setBounds(240, 86, 324, 20);
-		add(campoCantMin);
+		
 
 
 		Date date = new Date();
@@ -89,10 +86,19 @@ public class JPanelAnulaTicket extends JPanel {
 				String msg;
 
 
-				String matricula = campoMatricula.getText();
-				String cantMin = campoCantMin.getText();
+				int nroTicket = Integer.parseInt(campoTicket.getText());
+				//String cantMin = campoCantMin.getText();
+				
+				if (!isNumber(campoTicket.getText())){
+					mensaje.setText("Debe ingresar un valor entero para el número de Ticket");
+					mensaje.setVisible(true);
+				}
+				
+				else{
+					
+				}
 
-
+/*
 				if ((matricula.equals(null)||matricula.equals(""))||(cantMin.equals(null)||(cantMin.equals("")))){
 					mensaje.setText("Los campos Matricula y Cantidad de Minutos no pueden quedar vacios");
 					mensaje.setVisible(true);
@@ -109,12 +115,12 @@ public class JPanelAnulaTicket extends JPanel {
 							TicketVentaSalida tvs = pm.CompraTicket(matricula, cantMin, dateTimePicker.getDateTimeAsString());
 							RespuestaIcono icon = new RespuestaIcono();
 							RespuestaCompraTicket.infoCompraTicket(tvs.getTicketNro(), tvs.getImpTotal(), tvs.getFecha(), tvs.getMensaje(), JOptionPane.DEFAULT_OPTION, icon);
-							campoMatricula.setText("");
+							campoTicket.setText("");
 							campoCantMin.setText("");
 							mensaje.setText("");
 						}
 					}
-				}
+				}*/
 				
 				jpanelAnulaTicket.revalidate();
 				jpanelAnulaTicket.repaint(); 
@@ -127,7 +133,7 @@ public class JPanelAnulaTicket extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Manager_Socio manager_socio = Manager_Socio.getManagerSocio();
-				campoMatricula.setText("");
+				campoTicket.setText("");
 				campoCantMin.setText("");
 
 				mensaje.setText("");

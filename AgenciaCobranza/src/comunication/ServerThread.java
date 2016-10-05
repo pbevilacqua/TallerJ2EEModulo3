@@ -8,6 +8,7 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.logging.*;
 
+import DataTypes.*;
 import webServices.ControladorTicketProxy;
 import webServices.TicketVentaEntrada;
 import webServices.TicketVentaSalida;
@@ -16,14 +17,14 @@ public class ServerThread extends Thread {
     private Socket socket;
     private DataOutputStream out;
     private DataInputStream in;
-   // private int idSession;
+    //private int idSession;
     
     
     
     
     public ServerThread(Socket socket, int id) {
         this.socket = socket;
-        //this.idSession = id;
+       // this.idSession = id;
         try {
             out = new DataOutputStream(socket.getOutputStream());
             in = new DataInputStream(socket.getInputStream());
@@ -90,7 +91,8 @@ public class ServerThread extends Thread {
 
         			if (comando.equals("Compra")){
         				TicketVentaEntrada tve = new TicketVentaEntrada(); 
-        				tve.setAgenciaNro(1);
+        				//tve.setAgenciaNro(Integer.parseInt(this.getConfigPropertyValue("idAgencia")));    
+        				tve.setAgenciaNro(1);   
         				comando =  st.nextToken();
         				tve.setMatricula(comando);
         				comando =  st.nextToken();
@@ -114,6 +116,14 @@ public class ServerThread extends Thread {
         				System.out.println(tvs.getMensaje().getMensaje());
         				
         				mensaje = "Compra|"+tvs.getTicketNro()+"|"+tvs.getImpTotal()+"|"+tve.getFchHraVenta()+"|"+tvs.getMensaje().getCodigo()+"|"+tvs.getMensaje().getMensaje();
+        				
+
+        				// Si el codigo de error del mensaje es ok grabar el ticket en la base de datos de la agencia.
+        				if (tvs.getMensaje().getCodigo() == 0){
+        					System.out.println("DEBO GUARDAR EN BASE DE DATOS");
+        					TicketAgencia ta = new TicketAgencia();
+        					//TicketNro,Matricula,FchHraVenta,FchHraEst,CantMin,ImpTotal,TerminalNro
+        				}
         				
         				
         			}
