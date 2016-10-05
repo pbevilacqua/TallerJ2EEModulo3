@@ -1,12 +1,8 @@
 package Controladores;
 
 import java.util.Date;
-import java.util.GregorianCalendar;
-
 import javax.jws.WebMethod;
 import javax.jws.WebService;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import DataTypes.Mensaje;
 import DataTypes.Ticket;
