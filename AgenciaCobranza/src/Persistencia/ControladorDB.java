@@ -30,7 +30,7 @@ public class ControladorDB {
 		Connection con = null;
 		try {
 			InitialContext initialContext = new InitialContext();
-			DataSource ds = (DataSource) initialContext.lookup("java:/MySQL_IMMDS");
+			DataSource ds = (DataSource) initialContext.lookup("java:/MySql_AgenciaDS");
 			con = ds.getConnection();
 
 			//Class.forName("com.mysql.jdbc.Driver");
@@ -50,7 +50,7 @@ public class ControladorDB {
 		PreparedStatement pstmt = null;
 		try {
 			con = establecerConexion();
-			String insertQuery = "INSERT INTO Ticket (TicketNro,Matricula,FchHraVenta,FchHraEst,CantMin,ImpTotal,AgenciaNro) VALUES(?,?,?,?,?,?,?);";
+			String insertQuery = "INSERT INTO Ticket (TicketNro,Matricula,FchHraVenta,FchHraEst,CantMin,ImpTotal,TerminalNro) VALUES(?,?,?,?,?,?,?);";
 			pstmt = con.prepareStatement(insertQuery,Statement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, 0);
 			pstmt.setString(2, ticket.getMatricula());
@@ -58,7 +58,7 @@ public class ControladorDB {
 			pstmt.setDate(4, ticket.getFchHraEst());
 			pstmt.setInt(5, ticket.getCantMin());
 			pstmt.setFloat(6, ticket.getImpTotal());
-			pstmt.setInt(7, ticket.getAgenciaNro());
+			pstmt.setInt(7, ticket.getTerminalNro());
 
 			int i = pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();

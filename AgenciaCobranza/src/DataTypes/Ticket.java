@@ -11,7 +11,7 @@ public class Ticket {
 	private float impTotal;
 	private int codAnul;
 	private int fchHraAnul;
-	private int agenciaNro;
+	private int terminalNro;
 
 	public Ticket() {
 		
@@ -66,12 +66,12 @@ public class Ticket {
 		this.fchHraAnul = fchHraAnul;
 	}
 	
-	public int getAgenciaNro() {
-		return agenciaNro;
+	public int getTerminalNro() {
+		return terminalNro;
 	}
 
-	public void setAgenciaNro(int agenciaNro) {
-		this.agenciaNro = agenciaNro;
+	public void setTerminalNro(int agenciaNro) {
+		this.terminalNro = agenciaNro;
 	}
 	
 	
