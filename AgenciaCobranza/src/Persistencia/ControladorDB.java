@@ -54,8 +54,8 @@ public class ControladorDB {
 			pstmt = con.prepareStatement(insertQuery,Statement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, 0);
 			pstmt.setString(2, ticket.getMatricula());
-			pstmt.setDate(3, ticket.getFchHraVenta());
-			pstmt.setDate(4, ticket.getFchHraEst());
+			pstmt.setTimestamp(3, new java.sql.Timestamp(ticket.getFchHraVenta().getTime()));
+			pstmt.setTimestamp(4, new java.sql.Timestamp(ticket.getFchHraEst().getTime()));
 			pstmt.setInt(5, ticket.getCantMin());
 			pstmt.setFloat(6, ticket.getImpTotal());
 			pstmt.setInt(7, ticket.getTerminalNro());

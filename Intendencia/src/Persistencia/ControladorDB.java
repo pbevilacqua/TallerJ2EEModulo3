@@ -189,37 +189,39 @@ public class ControladorDB {
 
 	}
 
-//	public boolean existeAgencia(int agenciaNro) {
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		try {
-//			con = establecerConexion();
-//			String selectSQL = "SELECT AgenciaNro FROM Ticket WHERE AgenciaNro = ?";
-//			pstmt = con.prepareStatement(selectSQL);
-//			pstmt.setInt(1, agenciaNro);
-//			ResultSet rs = pstmt.executeQuery(selectSQL);
-//
-//			int ageNro;
-//			while (rs.next()) {
-//				ageNro = rs.getInt(1) + 1;
-//			}
-//
-//			return ageNro != 0;
-//		} catch (Exception e) {
-//			System.out.println("Exception: " + e.getMessage());
-//
-//		}
-//		} finally {
-//			try {
-//				if (pstmt != null)
-//					pstmt.close();
-//				if (con != null)
-//					con.close();
-//			} catch (SQLException e) {
-//				System.out.println("Ocurrio un error al liberar los recursos en reserva ticket");
-//				e.printStackTrace();
-//			}
-//
-//		}
-//	}
+	public boolean existeAgencia(int agenciaNro) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int ageNro = 0;
+		try {
+			con = establecerConexion();
+			String selectSQL = "SELECT AgenciaNro FROM Ticket WHERE AgenciaNro = ?";
+			pstmt = con.prepareStatement(selectSQL);
+			pstmt.setInt(1, agenciaNro);
+			ResultSet rs = pstmt.executeQuery(selectSQL);
+
+			while (rs.next()) {
+				ageNro = rs.getInt(1) + 1;
+			}
+
+			return ageNro != 0;
+		} catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
+
+		}
+		finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.out.println("Ocurrio un error al liberar los recursos en reserva ticket");
+				e.printStackTrace();
+			}
+
+		}
+		return ageNro != 0;
+	}
+	
 }
