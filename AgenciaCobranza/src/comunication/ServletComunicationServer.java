@@ -31,22 +31,25 @@ public class ServletComunicationServer extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		ServerSocket ss;
+		//ServerSocket ss;
         System.out.print("Inicializando servidor... ");
-        try {
-            ss = new ServerSocket(6000);
-            System.out.println("\t[OK]");
-            int idSession = 0;
-            while (true) {
-                Socket socket;
-                socket = ss.accept();
-                System.out.println("Nueva conexión entrante: "+socket);
-                ((ServerThread) new ServerThread(socket, idSession)).start();
-                idSession++;
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(ServletComunicationServer.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ((MainThread) new MainThread()).start();
+//        try {
+//            ss = new ServerSocket(6000);
+//            System.out.println("\t[OK]");
+//            int idSession = 0;
+//            while (true) {
+//                Socket socket;
+//                socket = ss.accept();
+//                System.out.println("Nueva conexión entrante: "+socket);
+//                ((ServerThread) new ServerThread(socket, idSession)).start();
+//                idSession++;
+//            }
+//        } catch (IOException ex) {
+//            Logger.getLogger(ServletComunicationServer.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+        
 		
 		
 	}
