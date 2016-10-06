@@ -44,6 +44,12 @@ public class ControladorTicketProxy implements webServices.ControladorTicket {
     return controladorTicket;
   }
   
+  public webServices.TicketAnulSalida anulacionTicket(int arg0, int arg1) throws java.rmi.RemoteException{
+    if (controladorTicket == null)
+      _initControladorTicketProxy();
+    return controladorTicket.anulacionTicket(arg0, arg1);
+  }
+  
   public webServices.TicketVentaSalida venderTicket(webServices.TicketVentaEntrada arg0) throws java.rmi.RemoteException{
     if (controladorTicket == null)
       _initControladorTicketProxy();

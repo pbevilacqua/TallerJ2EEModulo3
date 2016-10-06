@@ -8,5 +8,6 @@
 package webServices;
 
 public interface ControladorTicket extends java.rmi.Remote {
+    public webServices.TicketAnulSalida anulacionTicket(int arg0, int arg1) throws java.rmi.RemoteException;
     public webServices.TicketVentaSalida venderTicket(webServices.TicketVentaEntrada arg0) throws java.rmi.RemoteException;
 }
