@@ -34,15 +34,15 @@ public class ControladorTicket {
 
 			ticket.setMatricula(tve.getMatricula());
 			
-			float impTotal =  1000;
+			float impTotal =  2 * tve.getCantMin();
 			ticket.setImpTotal(impTotal);
-
-			cdb.reservaTicket(ticket);
+			
+			Mensaje mensaje = new Mensaje();
+			cdb.reservaTicket(ticket,mensaje);
 
 			tvs.setImpTotal(ticket.getImpTotal());
 			tvs.setTicketNro(ticket.getTicketNro());
-			tvs.getMensaje().setCodigo(0);
-			tvs.getMensaje().setMensaje("Ticket vendido con exito");
+			tvs.setMensaje(mensaje);
 			
 			return tvs;
 		} catch (Exception e) {

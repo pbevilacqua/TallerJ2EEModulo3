@@ -47,28 +47,51 @@ public class ControladorDB {
 		return con;
 	}
 
-	public void reservaTicket(Ticket ticket) throws Exception {
+	public void reservaTicket(Ticket ticket, Mensaje mensaje) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = establecerConexion();
-			String insertQuery = "INSERT INTO Ticket (TicketNro,Matricula,FchHraVenta,FchHraEst,CantMin,ImpTotal,AgenciaNro) VALUES(?,?,?,?,?,?,?);";
-			pstmt = con.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
-			pstmt.setInt(1, 0);
-			pstmt.setString(2, ticket.getMatricula());
-			pstmt.setTimestamp(3, new java.sql.Timestamp(ticket.getFchHraVenta().getTime()));
-			pstmt.setTimestamp(4, new java.sql.Timestamp(ticket.getFchHraEst().getTime()));
-			pstmt.setInt(5, ticket.getCantMin());
-			pstmt.setFloat(6, ticket.getImpTotal());
-			pstmt.setInt(7, ticket.getAgenciaNro());
 
-			int i = pstmt.executeUpdate();
-			ResultSet rs = pstmt.getGeneratedKeys();
-			rs.next();
-			ticket.setTicketNro(rs.getInt(1));
-			System.out.println(i + " registro/s ingresado/s");
+			String msg = "";
+			if (!existeAgencia(ticket.getAgenciaNro())) {
 
-		} catch (Exception e) {
+				msg = "Agencia no existe";
+
+				mensaje.setCodigo(202);
+				mensaje.setMensaje(msg);
+				System.out.println(msg);
+			} else {
+
+				String insertQuery = "INSERT INTO Ticket (TicketNro,Matricula,FchHraVenta,FchHraEst,CantMin,ImpTotal,AgenciaNro) VALUES(?,?,?,?,?,?,?);";
+				pstmt = con.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+				pstmt.setInt(1, 0);
+				pstmt.setString(2, ticket.getMatricula());
+				pstmt.setTimestamp(3, new java.sql.Timestamp(ticket.getFchHraVenta().getTime()));
+				pstmt.setTimestamp(4, new java.sql.Timestamp(ticket.getFchHraEst().getTime()));
+				pstmt.setInt(5, ticket.getCantMin());
+				pstmt.setFloat(6, ticket.getImpTotal());
+				pstmt.setInt(7, ticket.getAgenciaNro());
+
+				pstmt.executeUpdate();
+				ResultSet rs = pstmt.getGeneratedKeys();
+				rs.next();
+				ticket.setTicketNro(rs.getInt(1));
+
+				if (rs.getInt(1) > 0) {
+					mensaje.setCodigo(0);
+					mensaje.setMensaje("Ticket ingresado con exito");
+
+					System.out.println("Ticket ingresado con exito");
+				} else {
+
+				}
+
+			}
+
+		} catch (
+
+		Exception e) {
 			System.out.println("Exception: " + e.getMessage());
 			throw (new Exception());
 		}
@@ -123,18 +146,9 @@ public class ControladorDB {
 
 				System.out.println("Ticket anulado con exito");
 			} else {
-				selectSQL = "SELECT AgenciaNro FROM Ticket WHERE AgenciaNro = ?";
-				preparedStatement = con.prepareStatement(selectSQL);
-				preparedStatement.setInt(1, ticket.getAgenciaNro());
-				rs = preparedStatement.executeQuery(selectSQL);
-
-				int agenciaNro = 0;
-				while (rs.next()) {
-					agenciaNro = rs.getInt(1) + 1;
-				}
 
 				String msg = "";
-				if (agenciaNro == 0) {
+				if (!existeAgencia(ticket.getAgenciaNro())) {
 
 					msg = "Agencia no existe";
 
@@ -142,17 +156,8 @@ public class ControladorDB {
 					mensaje.setMensaje(msg);
 					System.out.println(msg);
 				} else {
-					selectSQL = "SELECT TicketNro FROM Ticket WHERE TicketNro = ?";
-					preparedStatement = con.prepareStatement(selectSQL);
-					preparedStatement.setInt(1, ticket.getTicketNro());
-					rs = preparedStatement.executeQuery(selectSQL);
 
-					int ticketNro = 0;
-					while (rs.next()) {
-						ticketNro = rs.getInt(1) + 1;
-					}
-
-					if (ticketNro == 0) {
+					if (!existeTicket(ticket.getTicketNro())) {
 						msg = "Ticket no existe";
 
 						mensaje.setCodigo(201);
@@ -181,7 +186,7 @@ public class ControladorDB {
 				if (con != null)
 					con.close();
 			} catch (SQLException e) {
-				System.out.println("Ocurrio un error al liberar los recursos en reserva ticket");
+				System.out.println("Ocurrio un error al liberar los recursos en anulacion ticket");
 				e.printStackTrace();
 			}
 
@@ -195,7 +200,7 @@ public class ControladorDB {
 		int ageNro = 0;
 		try {
 			con = establecerConexion();
-			String selectSQL = "SELECT AgenciaNro FROM Ticket WHERE AgenciaNro = ?";
+			String selectSQL = "SELECT AgenciaNro FROM Agencia WHERE AgenciaNro = ?;";
 			pstmt = con.prepareStatement(selectSQL);
 			pstmt.setInt(1, agenciaNro);
 			ResultSet rs = pstmt.executeQuery(selectSQL);
@@ -204,24 +209,57 @@ public class ControladorDB {
 				ageNro = rs.getInt(1) + 1;
 			}
 
-			return ageNro != 0;
+			return ageNro > 0;
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
 
-		}
-		finally {
+		} finally {
 			try {
 				if (pstmt != null)
 					pstmt.close();
 				if (con != null)
 					con.close();
 			} catch (SQLException e) {
-				System.out.println("Ocurrio un error al liberar los recursos en reserva ticket");
+				System.out.println("Ocurrio un error al liberar los recursos en consulta agencia");
 				e.printStackTrace();
 			}
 
 		}
-		return ageNro != 0;
+		return ageNro == 0;
 	}
-	
+
+	public boolean existeTicket(int ticketNro) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int tckNro = 0;
+		try {
+			con = establecerConexion();
+
+			String selectSQL = "SELECT TicketNro FROM Ticket WHERE TicketNro = ?;";
+			pstmt = con.prepareStatement(selectSQL);
+			pstmt.setInt(1, ticketNro);
+			ResultSet rs = pstmt.executeQuery(selectSQL);
+
+			while (rs.next()) {
+				tckNro = rs.getInt(1) + 1;
+			}
+
+			return tckNro > 0;
+		} catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
+
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.out.println("Ocurrio un error al liberar los recursos en consulta ticket");
+				e.printStackTrace();
+			}
+
+		}
+		return tckNro > 0;
+	}
 }
