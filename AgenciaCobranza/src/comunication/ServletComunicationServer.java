@@ -1,20 +1,19 @@
 package comunication;
 
 import java.io.IOException;
+
+import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.logging.*;
 
 /**
  * Servlet implementation class ServletComunicationServer
  */
-@WebServlet("/ServletComunicationServer")
+@WebServlet(name="/ServletComunicationServer",loadOnStartup=1)
 public class ServletComunicationServer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

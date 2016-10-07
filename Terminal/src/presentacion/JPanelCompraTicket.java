@@ -19,7 +19,6 @@ import utilidades.*;
 
 public class JPanelCompraTicket extends JPanel {
 
-	//private int nroDeSocio;
 	private JTextField campoMatricula;
 	private JTextField campoCantMin;
 	private JLabel mensaje; 
@@ -101,6 +100,7 @@ public class JPanelCompraTicket extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				String msg;
+				ProcesarMensaje pm = ProcesarMensaje.getProcesarMensaje();			
 
 
 				String matricula = campoMatricula.getText();
@@ -112,17 +112,17 @@ public class JPanelCompraTicket extends JPanel {
 					mensaje.setVisible(true);
 				}
 				else{
-					if (!isNumber(cantMin)){
+					if (!pm.isNumber(cantMin)){
 						mensaje.setText("Debe ingresar un valor entero para la cantidad de minutos");
 						mensaje.setVisible(true);
 					}
 					else {
-						if (isNumber(cantMin)) {
+						if (pm.isNumber(cantMin)) {
 							mensaje.setText("");
-							ProcesarMensaje pm = ProcesarMensaje.getProcesarMensaje();
+							
 							TicketVentaSalida tvs = pm.CompraTicket(matricula, cantMin, dateTimePicker.getDateTimeAsString());
-							RespuestaIcono icon = new RespuestaIcono();
-							RespuestaCompraTicket.infoCompraTicket(tvs.getTicketNro(), tvs.getImpTotal(), tvs.getFecha(), tvs.getMensaje(), JOptionPane.DEFAULT_OPTION, icon);
+							RespuestaCompra icon = new RespuestaCompra();
+							RespuestaTicket.infoCompraTicket(tvs.getTicketNro(), tvs.getImpTotal(), tvs.getFecha(), tvs.getMensaje(), JOptionPane.DEFAULT_OPTION, icon);
 							campoMatricula.setText("");
 							campoCantMin.setText("");
 							mensaje.setText("");
@@ -152,14 +152,7 @@ public class JPanelCompraTicket extends JPanel {
 		});
 	}
 
-	private static boolean isNumber(String n) {
-		try {
-			Integer.parseInt(n);
-			return true;
-		} catch (NumberFormatException nfe) {
-			return false;
-		}
-	}
+	
 }
 
 

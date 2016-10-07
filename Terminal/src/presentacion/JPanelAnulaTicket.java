@@ -2,8 +2,6 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -11,7 +9,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import utilidades.*;
+import utilidades.ProcesarMensaje;
+import utilidades.RespuestaAnula;
+import utilidades.TicketAnulSalida;
 
 
 
@@ -42,8 +42,13 @@ public class JPanelAnulaTicket extends JPanel {
 		setLayout(null);
 
 		JLabel lbltitulo = new JLabel("Anular Ticket");
-		lbltitulo.setBounds(32, 10, 150, 32);
+		lbltitulo.setBounds(32, 10, 115, 32);
 		add(lbltitulo);
+		
+
+		JLabel lblTicket = new JLabel("Numero de Ticket a Anular");
+		lblTicket.setBounds(32, 50, 175, 32);
+		add(lblTicket);
 
 		mensaje = new JLabel();
 		mensaje.setBounds(32, 230, 532, 32);
@@ -55,19 +60,6 @@ public class JPanelAnulaTicket extends JPanel {
 		campoTicket.setColumns(50);
 		campoTicket.setBounds(240, 56, 324, 20);
 		add(campoTicket);
-
-
-		
-
-
-		Date date = new Date();
-		DateTimePicker dateTimePicker = new DateTimePicker();
-		dateTimePicker.setFormats( DateFormat.getDateTimeInstance( DateFormat.SHORT, DateFormat.MEDIUM ) );
-		dateTimePicker.setTimeFormat( DateFormat.getTimeInstance( DateFormat.MEDIUM ) );
-		dateTimePicker.setBounds(240, 116, 200, 20);
-		dateTimePicker.setDate(date);
-		add(dateTimePicker);
-
 
 		JButton aceptarButton = new JButton("Aceptar");
 		aceptarButton.setBounds(391, 300, 89, 23);
@@ -83,45 +75,31 @@ public class JPanelAnulaTicket extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				String msg;
-
-
-				int nroTicket = Integer.parseInt(campoTicket.getText());
-				//String cantMin = campoCantMin.getText();
+				ProcesarMensaje pm = ProcesarMensaje.getProcesarMensaje();
 				
+				
+				int nroTicket = Integer.parseInt(campoTicket.getText());
+								
 				if (!isNumber(campoTicket.getText())){
 					mensaje.setText("Debe ingresar un valor entero para el número de Ticket");
 					mensaje.setVisible(true);
 				}
 				
-				else{
-					
+				else
+				{
+					if (pm.isNumber(campoTicket.getText())) {
+						mensaje.setText("");
+						TicketAnulSalida tas = pm.AnulaTicket(nroTicket);					
+								
+								
+						RespuestaAnula icon = new RespuestaAnula();
+						RespuestaTicket.infoAnulaTicket(campoTicket.getText(), String.valueOf(tas.getCodAnul()), tas.getFchHraAnul(), tas.getMensaje(), JOptionPane.DEFAULT_OPTION, icon);
+						
+						campoCantMin.setText("");
+						mensaje.setText("");
+					}
 				}
 
-/*
-				if ((matricula.equals(null)||matricula.equals(""))||(cantMin.equals(null)||(cantMin.equals("")))){
-					mensaje.setText("Los campos Matricula y Cantidad de Minutos no pueden quedar vacios");
-					mensaje.setVisible(true);
-				}
-				else{
-					if (!isNumber(cantMin)){
-						mensaje.setText("Debe ingresar un valor entero para la cantidad de minutos");
-						mensaje.setVisible(true);
-					}
-					else {
-						if (isNumber(cantMin)) {
-							mensaje.setText("");
-							ProcesarMensaje pm = ProcesarMensaje.getProcesarMensaje();
-							TicketVentaSalida tvs = pm.CompraTicket(matricula, cantMin, dateTimePicker.getDateTimeAsString());
-							RespuestaIcono icon = new RespuestaIcono();
-							RespuestaCompraTicket.infoCompraTicket(tvs.getTicketNro(), tvs.getImpTotal(), tvs.getFecha(), tvs.getMensaje(), JOptionPane.DEFAULT_OPTION, icon);
-							campoTicket.setText("");
-							campoCantMin.setText("");
-							mensaje.setText("");
-						}
-					}
-				}*/
-				
 				jpanelAnulaTicket.revalidate();
 				jpanelAnulaTicket.repaint(); 
 			}
@@ -132,9 +110,9 @@ public class JPanelAnulaTicket extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Manager_Socio manager_socio = Manager_Socio.getManagerSocio();
+				
 				campoTicket.setText("");
-				campoCantMin.setText("");
+				
 
 				mensaje.setText("");
 				mensaje.setVisible(false);

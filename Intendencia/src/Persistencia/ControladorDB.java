@@ -1,11 +1,11 @@
 package Persistencia;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Date;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -119,24 +119,25 @@ public class ControladorDB {
 
 			Date fchHraAnul = new Date(new java.util.Date().getTime());
 			int codAnul = 0;
-
+			
 			String selectSQL = "SELECT max(CodAnul) FROM Ticket";
 			PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
-			ResultSet rs = preparedStatement.executeQuery(selectSQL);
+			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				codAnul = rs.getInt(1) + 1;
 			}
-
+			
+			//codAnul es siempre mayor que 0 --> Mejorar lógica
 			if (codAnul > 0) {
 
-				String updateQuery = "UPDATE Ticket SET CodAnul = ?, FchHraAnul = ? WHERE TicketNro = ? AND AgenciaNro = ?;";
+				String updateQuery = "UPDATE Ticket SET CodAnul = ?, FchHraAnul = ? WHERE TicketNro = ? AND AgenciaNro = ?";
 				pstmt = con.prepareStatement(updateQuery);
 				pstmt.setInt(1, codAnul);
 				pstmt.setTimestamp(2, new java.sql.Timestamp(fchHraAnul.getTime()));
 				pstmt.setInt(3, ticket.getTicketNro());
 				pstmt.setInt(4, ticket.getAgenciaNro());
 
-				int i = pstmt.executeUpdate();
+				pstmt.executeUpdate();
 
 				ticket.setFchHraAnul(fchHraAnul);
 				ticket.setCodAnul(codAnul);
@@ -203,7 +204,7 @@ public class ControladorDB {
 			String selectSQL = "SELECT AgenciaNro FROM Agencia WHERE AgenciaNro = ?;";
 			pstmt = con.prepareStatement(selectSQL);
 			pstmt.setInt(1, agenciaNro);
-			ResultSet rs = pstmt.executeQuery(selectSQL);
+			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				ageNro = rs.getInt(1) + 1;
@@ -238,13 +239,13 @@ public class ControladorDB {
 			String selectSQL = "SELECT TicketNro FROM Ticket WHERE TicketNro = ?;";
 			pstmt = con.prepareStatement(selectSQL);
 			pstmt.setInt(1, ticketNro);
-			ResultSet rs = pstmt.executeQuery(selectSQL);
+			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				tckNro = rs.getInt(1) + 1;
+				tckNro = rs.getInt(1);
 			}
 
-			return tckNro > 0;
+			return tckNro == ticketNro;
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
 

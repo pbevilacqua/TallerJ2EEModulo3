@@ -53,7 +53,7 @@ public class ControladorDB {
 			con = establecerConexion();
 			String insertQuery = "INSERT INTO Ticket (TicketNro,Matricula,FchHraVenta,FchHraEst,CantMin,ImpTotal,TerminalNro) VALUES(?,?,?,?,?,?,?);";
 			pstmt = con.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
-			pstmt.setInt(1, 0);
+			pstmt.setInt(1, ticket.getTicketNro());
 			pstmt.setString(2, ticket.getMatricula());
 			pstmt.setTimestamp(3, new java.sql.Timestamp(ticket.getFchHraVenta().getTime()));
 			pstmt.setTimestamp(4, new java.sql.Timestamp(ticket.getFchHraEst().getTime()));
@@ -130,16 +130,16 @@ public class ControladorDB {
 		try {
 			con = establecerConexion();
 
-			String selectSQL = "SELECT TicketNro FROM Ticket WHERE TicketNro = ?;";
+			String selectSQL = "SELECT TicketNro FROM Ticket WHERE TicketNro = ?";
 			pstmt = con.prepareStatement(selectSQL);
 			pstmt.setInt(1, ticketNro);
-			ResultSet rs = pstmt.executeQuery(selectSQL);
+			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				tckNro = rs.getInt(1) + 1;
+				tckNro = rs.getInt(1);
 			}
 
-			return tckNro > 0;
+			return tckNro == ticketNro;
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
 
@@ -153,7 +153,6 @@ public class ControladorDB {
 				System.out.println("Ocurrio un error al liberar los recursos en consulta ticket");
 				e.printStackTrace();
 			}
-
 		}
 		return tckNro > 0;
 	}

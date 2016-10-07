@@ -14,6 +14,7 @@ import java.util.logging.*;
 import DataTypes.*;
 import controladorAgencia.ControladorAgencia;
 import webServices.ControladorTicketProxy;
+import webServices.TicketAnulSalida;
 import webServices.TicketVentaEntrada;
 import webServices.TicketVentaSalida;
 
@@ -105,13 +106,6 @@ public class ServerThread extends Thread {
         				tve.setCantMin(Integer.parseInt(comando));
 
         				comando =  st.nextToken();
-//        				//tve.setFchHraEst(comando);
-//        				tve.setFchHraEst("2016-10-01T23:00:00");
-//        				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-//        				Date fecha = new Date();
-//        				//tve.setFchHraVenta(df.format(fecha));	
-//        				tve.setFchHraVenta("2016-10-02T15:22:22");
-        				
         				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 						Date parsed = df.parse(comando);
 						System.out.println("parsed date: " + parsed);
@@ -124,7 +118,7 @@ public class ServerThread extends Thread {
 
 						GregorianCalendar gCFchVen = new GregorianCalendar();
 						tve.setFchHraVenta(gCFchVen);	
-						Date d = gCFchVen.getTime();
+						Date dFchVen = gCFchVen.getTime();
         				
         				ControladorTicketProxy ctp = new ControladorTicketProxy();
         				TicketVentaSalida tvs = new TicketVentaSalida();
@@ -136,12 +130,11 @@ public class ServerThread extends Thread {
         				System.out.println(tvs.getMensaje().getCodigo());
         				System.out.println(tvs.getMensaje().getMensaje());
         				
-        				mensaje = "Compra|"+tvs.getTicketNro()+"|"+tvs.getImpTotal()+"|"+d+"|"+tvs.getMensaje().getCodigo()+"|"+tvs.getMensaje().getMensaje();
+        				mensaje = "Compra|"+tvs.getTicketNro()+"|"+tvs.getImpTotal()+"|"+dFchVen+"|"+tvs.getMensaje().getCodigo()+"|"+tvs.getMensaje().getMensaje();
         				
 
         				// Si el codigo de error del mensaje es ok grabar el ticket en la base de datos de la agencia.
         				if (tvs.getMensaje().getCodigo() == 0){
-        					System.out.println("DEBO GUARDAR EN BASE DE DATOS");
         					TicketAgencia ta = new TicketAgencia();
         					ta.setTicketNro(tvs.getTicketNro());
         					ta.setMatricula(tve.getMatricula());
@@ -162,7 +155,40 @@ public class ServerThread extends Thread {
         			{
         				if (comando.equals("Anula")){
         					//Crea mensaje anula ticket
-        					System.out.println("Comienza con Anula");
+        					//TicketVentaEntrada tve = new TicketVentaEntrada(); 
+            				//tve.setAgenciaNro(Integer.parseInt(this.getConfigPropertyValue("idAgencia")));    
+            				//tve.setAgenciaNro(1);   
+            				comando =  st.nextToken();
+            				ControladorAgencia ca = new ControladorAgencia();
+            				TicketAgencia ta = new TicketAgencia();
+            				int nroTicket = Integer.parseInt(comando);
+            				if (ca.existeTicket(nroTicket)){
+            					
+            					ControladorTicketProxy ctp = new ControladorTicketProxy();
+                				TicketAnulSalida tas = new TicketAnulSalida();
+                				//tas = ctp.anulacionTicket(nroTicket, Integer.parseInt(this.getConfigPropertyValue("idAgencia")));
+                				tas = ctp.anulacionTicket(nroTicket, 1);
+                				
+                				Calendar gCFchHraAnul = tas.getFchHraAnul();
+        						Date dFchAnul = gCFchHraAnul.getTime();
+                			                				
+                				mensaje = "Anula|"+tas.getCodAnul()+"|"+dFchAnul+"|"+tas.getMensaje().getMensaje();
+                				
+                				if (tas.getCodAnul() != 0) {
+                					
+                					// Si en la intendencia se anulo ok anulo el ticket en la agencia
+                					ta.setTicketNro(Integer.parseInt(comando));
+                					ta.setCodAnul(tas.getCodAnul()); 
+                					ta.setFchHraAnul((GregorianCalendar)tas.getFchHraAnul());
+                					ca.anularTicket(ta);
+                					
+                				}	
+            					
+            				}
+            				else {
+            					//MANDAR ERROR DE QUE NO EXISTE EL TICKET EN LA AGENCIA
+            				}
+            				
         				}
         			}
         		}

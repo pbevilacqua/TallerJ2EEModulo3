@@ -1,8 +1,5 @@
 package utilidades;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,5 +64,53 @@ public class ProcesarMensaje {
 		
 		return tvs;
 
+	}
+	
+	public TicketAnulSalida AnulaTicket(int nroTicket){
+		TicketAnulSalida tas = new TicketAnulSalida();
+		String msg;
+		
+		msg = "Anula|"+nroTicket;
+		socketClient sc= socketClient.getInstance();
+		String mensaje = sc.enviarMensaje(msg);
+		
+		
+		  try {
+	        	if (mensaje!= null){
+	        		StringTokenizer st = new StringTokenizer(mensaje,"|");
+	        		String comando =  st.nextToken();
+	        		if (comando.equals("Anula")){
+	        			
+	        				comando =  st.nextToken();
+	        				tas.setCodAnul(Integer.valueOf(comando));
+	        				comando =  st.nextToken();
+	        				tas.setFchHraAnul(comando);
+	        				comando =  st.nextToken();
+	        				tas.setMensaje(comando);
+	        					        				
+	        				System.out.println("Info de la respuesta de Anula ticket");
+	        				System.out.println(tas.getCodAnul());
+	        				System.out.println(tas.getFchHraAnul());
+	        				System.out.println(tas.getMensaje());      				
+	        				
+	        			}	        			
+	        		}	        	
+	        } catch (Exception ex) {
+	            Logger.getLogger(ProcesarMensaje.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+		
+		return tas;
+
+	}
+	
+	
+	
+	public boolean isNumber(String n) {
+		try {
+			Integer.parseInt(n);
+			return true;
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
 	}
 }

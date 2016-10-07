@@ -8,9 +8,11 @@ public class TicketAgencia {
 	private String matricula;
 	private GregorianCalendar fchHraVenta;
 	private GregorianCalendar fchHraEst;
+	private GregorianCalendar fchHraAnul;
 	private int cantMin;
 	private float ImpTotal;
 	private int TerminalNro;
+	private int codAnul;
 
 	public TicketAgencia() {
 		
@@ -34,6 +36,14 @@ public class TicketAgencia {
 	public void setFchHraEst(GregorianCalendar fchHraEst) {
 		this.fchHraEst = fchHraEst;
 	}
+	public GregorianCalendar getFchHraAnul() {
+		return fchHraAnul;
+	}
+
+	public void setFchHraAnul(GregorianCalendar fchHraAnul) {
+		this.fchHraAnul = fchHraAnul;
+	}
+
 	public int getCantMin() {
 		return cantMin;
 	}
@@ -63,6 +73,14 @@ public class TicketAgencia {
 
 	public void setTicketNro(int ticketNro) {
 		TicketNro = ticketNro;
+	}
+
+	public int getCodAnul() {
+		return codAnul;
+	}
+
+	public void setCodAnul(int codAnul) {
+		this.codAnul = codAnul;
 	}
 
 }

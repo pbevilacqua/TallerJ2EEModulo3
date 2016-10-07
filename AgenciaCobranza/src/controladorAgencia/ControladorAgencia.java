@@ -2,12 +2,30 @@ package controladorAgencia;
 
 import DataTypes.Ticket;
 import DataTypes.TicketAgencia;
-//import DataTypes.TicketVentaSalida;
 import Persistencia.ControladorDB;
 
 public class ControladorAgencia {
 
 
+	public void anularTicket(TicketAgencia ta) {
+
+		try {
+			ControladorDB cdb = ControladorDB.getControladorDB();
+			Ticket ticket = new Ticket();
+			ticket.setTicketNro(ta.getTicketNro());
+			ticket.setCodAnul(ta.getCodAnul());
+			ticket.setFchHraAnul(ta.getFchHraAnul().getTime());
+			cdb.anularTicket(ticket);
+
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	
 	public void venderTicket(TicketAgencia ta) {
 
 		try {
@@ -28,6 +46,23 @@ public class ControladorAgencia {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+	}
+
+	public boolean existeTicket(int ticketNro){
+		boolean resultado = false;
+		try {
+			ControladorDB cdb = ControladorDB.getControladorDB();
+			if (cdb.existeTicket(ticketNro)){
+				resultado = true;			
+			}
+
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultado;
 
 	}
 

@@ -1,6 +1,6 @@
 package DataTypes;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Ticket {
 	private int ticketNro;
