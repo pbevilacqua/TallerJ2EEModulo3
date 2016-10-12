@@ -139,7 +139,7 @@ public class ControladorDB {
 				tckNro = rs.getInt(1);
 			}
 
-			return tckNro == ticketNro;
+			return tckNro > 0;
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
 
