@@ -1,5 +1,6 @@
 package Controladores;
 
+import java.util.ArrayList;
 import java.util.Date;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -73,6 +74,15 @@ public class ControladorTicket {
 		tas.setMensaje(mensaje);
 		
 		return tas;
+	}
+	
+	public ArrayList<Ticket> listarTicket(Date fechaDesde, Date fechaHasta) {
+
+		ControladorDB cdb = ControladorDB.getControladorDB();
+		ArrayList<Ticket> lts = new ArrayList<Ticket>();
+		lts = cdb.listarTicket(new java.sql.Date(fechaDesde.getTime()), new java.sql.Date(fechaHasta.getTime())) ;
+		
+		return lts;
 	}
 
 }

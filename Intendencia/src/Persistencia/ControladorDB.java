@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.Date;
 
 import javax.naming.InitialContext;
@@ -298,5 +300,53 @@ public class ControladorDB {
 
 		}
 		return tckNro > 0;
+	}
+	
+	public ArrayList<Ticket> listarTicket(Date fechaDesde, Date fechaHasta) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ArrayList<Ticket> lts = new ArrayList<Ticket>();
+		int tckNro = 0;
+		try {
+			con = establecerConexion();
+
+			String selectSQL = "SELECT TicketNro, Matricula, FchHraVenta, FchHraEst, CantMin, ImpTotal, CodAnul, FchHraAnul , AgenciaNro FROM Ticket where fchhraventa >= ? and fchhraventa <= ?";
+			pstmt = con.prepareStatement(selectSQL);
+			pstmt.setTimestamp(1, new java.sql.Timestamp(fechaDesde.getTime()));
+			pstmt.setTimestamp(2, new java.sql.Timestamp(fechaHasta.getTime()));
+			ResultSet rs = pstmt.executeQuery();
+			
+			Ticket ticket = new Ticket();
+			while (rs.next()) {
+				ticket.setTicketNro(rs.getInt("TicketNro"));
+				ticket.setMatricula(rs.getString("Matricula"));
+				ticket.setFchHraEst(new Date(rs.getTimestamp("FchHraEst").getTime()));
+				ticket.setFchHraVenta(new Date(rs.getTimestamp("FchHraVenta").getTime()));
+				ticket.setCantMin(rs.getInt("CantMin"));
+				ticket.setImpTotal(rs.getFloat("ImpTotal"));
+				ticket.setCodAnul(rs.getInt("CodAnul"));
+				ticket.setFchHraAnul(new Date(rs.getTimestamp("FchHraAnul").getTime()));
+				ticket.setAgenciaNro(rs.getInt("AgenciaNro"));
+				lts.add(ticket);
+				ticket = new Ticket();
+			}
+
+			return lts;
+		} catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
+
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.out.println("Ocurrio un error al liberar los recursos en listar Tickets");
+				e.printStackTrace();
+			}
+
+		}
+		return lts;
 	}
 }
