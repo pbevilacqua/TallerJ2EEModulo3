@@ -21,7 +21,6 @@ public class JPanelAnulaTicket extends JPanel {
 
 	//private int nroDeSocio;
 	private JTextField campoTicket;
-	private JTextField campoCantMin;
 	private JLabel mensaje; 
 
 	//Singleton JPanelCompraTicket
@@ -95,7 +94,6 @@ public class JPanelAnulaTicket extends JPanel {
 						RespuestaAnula icon = new RespuestaAnula();
 						RespuestaTicket.infoAnulaTicket(campoTicket.getText(), String.valueOf(tas.getCodAnul()), tas.getFchHraAnul(), tas.getMensaje(), JOptionPane.DEFAULT_OPTION, icon);
 						
-						campoCantMin.setText("");
 						mensaje.setText("");
 					}
 				}
