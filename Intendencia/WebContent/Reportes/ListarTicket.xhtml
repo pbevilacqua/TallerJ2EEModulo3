@@ -5,85 +5,106 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<h:outputScript library="js" name="jsfcrud.js" />
-</head>
-<body>
-	<h:head>
-		<f:facet name="first">
-			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
-			<title>PrimeFaces</title>
-		</f:facet>
-	</h:head>
-	<f:view>
-		<h:form>
-			<p:dataTable value="#{controladorJSF.listaTicket}" var="item">
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Número" />
-					</f:facet>
-					<h:outputText value="#{item.ticketNro}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Agencia" />
-					</f:facet>
-					<h:outputText value="#{item.agenciaNro}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Matricula" />
-					</f:facet>
-					<h:outputText value="#{item.matricula}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Estacionamiento" />
-					</f:facet>
-					<h:outputText value="#{item.fchHraEst}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Venta" />
-					</f:facet>
-					<h:outputText value="#{item.fchHraVenta}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Anulacion" />
-					</f:facet>
-					<h:outputText value="#{item.codAnul}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Fecha Anulacion" />
-					</f:facet>
-					<h:outputText value="#{item.fchHraAnul}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Importe" />
-					</f:facet>
-					<h:outputText value="#{item.impTotal}" />
-				</p:column>
+<ui:composition template="/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{bundle.EditContratoTitle}"></h:outputText>
+	</ui:define>
+	<ui:define name="body">
+		<body>
+			<h:head>
+				<f:facet name="first">
+					<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+					<title>PrimeFaces</title>
+				</f:facet>
+			</h:head>
+			<f:view>
+				<h:form>
+					<p:growl id="msgs" showDetail="true" />
+					<h:panelGrid columns="2" cellpadding="5">
 
-<!-- 				<p:summaryRow> -->
-<!-- 					<p:column colspan="3" style="text-align:right"> -->
-<!-- 						<h:outputText value="Total:" /> -->
-<!-- 					</p:column> -->
-<!-- 					<p:column> -->
-<!-- 						<h:outputText value="#{dtSummaryRowView.randomPrice}"> -->
-<!-- 							<f:convertNumber type="currency" currencySymbol="$" /> -->
-<!-- 						</h:outputText> -->
-<!-- 					</p:column> -->
-<!-- 				</p:summaryRow> -->
-			</p:dataTable>
+						<p:outputLabel for="datetime1" value="Fecha Desde:" />
+						<p:calendar id="datetime1" value="#{controladorJSF.fechaDesde}"
+							pattern="dd/MM/yyyy HH:mm:ss" />
+						<p:outputLabel for="datetime2" value="Fecha Hasta:" />
+						<p:calendar id="datetime2" value="#{controladorJSF.fechaHasta}"
+							pattern="dd/MM/yyyy HH:mm:ss" />
+
+						<h:commandButton value="Aceptar"
+							action="#{controladorJSF.accion()}" />
+					</h:panelGrid>
+					<p:dataTable value="#{controladorJSF.listaTicket}" var="item">
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Número" />
+							</f:facet>
+							<h:outputText value="#{item.ticketNro}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Agencia" />
+							</f:facet>
+							<h:outputText value="#{item.agenciaNro}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Matricula" />
+							</f:facet>
+							<h:outputText value="#{item.matricula}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Estacionamiento" />
+							</f:facet>
+							<h:outputText value="#{item.fchHraEst}">
+								<f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm:ss" />
+							</h:outputText>
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Venta" />
+							</f:facet>
+							<h:outputText value="#{item.fchHraVenta}">
+								<f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm:ss" />
+							</h:outputText>
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Anulacion" />
+							</f:facet>
+							<h:outputText value="#{item.codAnul}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Fecha Anulacion" />
+							</f:facet>
+							<h:outputText value="#{item.fchHraAnul}">
+								<f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm:ss" />
+							</h:outputText>
+						</p:column>
+						<p:column style="text-align:right">
+							<f:facet name="header">
+								<h:outputText value="Importe" />
+							</f:facet>
+							<h:outputText value="#{item.impTotal}" />
+						</p:column>
+						<p:columnGroup type="footer">
+							<p:row>
+
+								<p:column footerText="Total: " style="text-align:right"
+									colspan="7" />
+								<p:column footerText="#{controladorJSF.importeTotal}"
+									style="text-align:right" />
+
+							</p:row>
+						</p:columnGroup>
+					</p:dataTable>
 
 
 
-		</h:form>
-	</f:view>
-</body>
+				</h:form>
+			</f:view>
+		</body>
+	</ui:define>
+</ui:composition>
 </html>
