@@ -186,7 +186,7 @@ public class ServerThread extends Thread {
             					
             				}
             				else {
-            					//MANDAR ERROR DE QUE NO EXISTE EL TICKET EN LA AGENCIA
+            					mensaje = "Error|"+"El ticket "+nroTicket+" no fue vendido por esta agencia";
             				}
             				
         				}

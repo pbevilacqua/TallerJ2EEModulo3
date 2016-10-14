@@ -63,9 +63,13 @@ public class ControladorDB {
 
 			int i = pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
-			rs.next();
-			ticket.setTicketNro(rs.getInt(1));
-			System.out.println(i + " registro/s ingresado/s");
+			if(rs.next()){
+				ticket.setTicketNro(rs.getInt(1));
+				System.out.println(i + " registro/s ingresado/s");	
+			}
+			else{
+				rs.next();
+			}
 
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
