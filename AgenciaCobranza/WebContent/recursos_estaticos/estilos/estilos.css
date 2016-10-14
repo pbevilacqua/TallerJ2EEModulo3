@@ -1,0 +1,432 @@
+@CHARSET "ISO-8859-1";
+
+/***********************/
+/*       GENERAL       */
+/***********************/
+
+* {
+	font-family:Arial, Helvetica, sans-serif;
+	margin:0;
+	padding:0;
+}
+
+
+html, body {
+	width:100%;
+  	height: 100%;
+	margin:0;
+	padding:0;
+	overflow: hidden;	
+}
+
+
+body{
+	background: url("../imagenes/dolar2.jpg") no-repeat center center fixed;
+	background-size: cover;
+}
+
+/***********************/
+/*   FIN GENERAL   */
+/***********************/
+
+/***********************/
+/*       CABEZAL       */
+/***********************/
+
+.cabezal {
+	position:relative;
+	display:block;
+	height:50px;
+	margin:auto; /* Permite centrar el contenido, se define antes de margin-bottom para no sobreescribir la propiedad */
+	width:818px;
+}
+
+
+/* MENU */
+.cabezal ul {
+	list-style:none;
+}
+
+.cabezal .nav {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+}
+
+.cabezal .nav > li {
+	float:left;
+	flex-grow: 1;
+	border-bottom: 1px solid #3360AE;
+	text-align: center;
+	border-right: 1px solid #FFF;
+}
+
+.cabezal .nav > li:hover {
+	border-bottom: 1px solid #434343;
+}
+
+
+.cabezal .nav > li:first-child{
+	border-bottom-left-radius: 5px;
+	border-left: 1px solid #3360AE;
+	
+}
+.cabezal .nav > li:first-child:hover{
+	border-left: 1px solid #434343;
+}
+
+.cabezal .nav > li:last-child{
+	border-bottom-right-radius: 5px;
+	border-right: 1px solid #3360AE;
+}
+
+.cabezal .nav > li:last-child:hover{
+	border-right: 1px solid #434343;
+}
+
+.cabezal .nav li a {
+	background-color:#3360AE;
+	color:#fff;
+	text-decoration:none;
+	padding:10px 12px;
+	display:block;
+    overflow: hidden;
+    min-width:115px;
+    max-width:230px;
+    text-overflow: ellipsis;
+    white-space:nowrap;	
+	
+}
+
+.cabezal .nav li a:hover {
+	background-color:#434343;
+}
+
+.cabezal .nav li .usuario_img{
+	display:inline-block;
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+	margin: 0 5px;
+}
+
+.cabezal .nav li ul {
+	display:block;
+	position:absolute;
+	min-width:140px;
+	top:41px;
+	z-index: 1;
+	visibility: hidden;
+	opacity: 0;	
+	transition: visibility 0s, opacity 0.5s linear;
+}
+
+.cabezal .nav li:hover > ul {
+	display:block;
+	visibility: visible;
+  	opacity: 1;
+}
+
+.cabezal .nav li ul li {
+	position:relative;
+	border-bottom: 1px solid #FFF;
+	text-align: left;
+}
+
+.cabezal .nav li ul li:first-child {
+	border-top: 1px solid #FFF;
+}
+
+.cabezal .nav li ul,
+.cabezal .nav li ul li:last-child{
+	border-bottom: 1px solid #3360AE;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.cabezal .nav li ul:hover,
+.cabezal .nav li ul li:last-child:hover{
+	border-bottom: 1px solid #434343;
+}
+
+/* .cabezal .nav li ul li ul {
+	right:-140px;
+	top:0px;
+} */
+
+/***********************/
+/*     FIN CABEZAL     */
+/***********************/
+
+/***********************/
+/*     FORMULARIOS     */
+/***********************/
+.cuerpo{
+	min-height: calc(100vh - 100px);
+	height: calc(100vh - 100px); /* Lo debo definir para que los div's hijos puedan redefinir la propiedad */
+	overflow: auto;
+}
+
+.contenedor {
+	display: block; 
+	margin: 20px auto;
+	top:0px;
+	border:0px;
+	padding: 25px;
+	width: 80%;
+	height: 85%;
+	background-color: rgba(255, 255, 255, 0.95); 
+	border:1px solid white; 
+	border-radius: 5px; 
+	z-index: 0;
+	overflow: auto;
+}
+
+.contenedor.login {
+	
+	width: 400px;
+	height: 150px;
+	
+}
+
+ fieldset {
+ 	min-width.0px;
+	padding:40px;
+	margin: 0px;
+	height:87%;
+	border-radius: 5px;	
+	overflow: auto;
+}
+
+fieldset legend{
+	font-size: 20px;
+	font-weight: bold;
+	color: #3360AE;
+}
+
+form{
+	font-size: 15px;
+}
+
+form .linea_formulario{ 
+	display: block;
+	height: 40px;
+}
+
+form .linea_formulario > label{
+	display: inline-block;
+	width: 120px;
+	word-wrap: break-word;
+}
+
+form .linea_formulario > label.campo_obligatorio::before{
+	content: "*";
+	color: red;
+	margin-left: -6px;
+}
+
+form .linea_formulario > input[type="text"], form .linea_formulario > input[type="password"]{
+	height: 25px;
+	padding: 0px 10px;
+}
+
+form .linea_formulario > input[type="radio"] + span{
+	font-style:italic;
+	margin:0px 20px 0px 5px;
+}
+
+form .linea_formulario > select {
+	height: 25px;
+	padding: 0px 10px;	
+}
+
+form .linea_formulario > select > option {
+	height: 25px;
+	padding: 0px 10px;		
+}
+
+form .linea_formulario > input[type="submit"]{
+	padding: 10px 15px;
+	min-width: 70px;
+	min-height: 40px;
+	border-radius: 5px;
+	border:none;
+	background-color: #408C35;
+	color: #FFF;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+form .linea_formulario > input[type="submit"]:hover{
+	background-color: #4CA93D;
+}
+
+/***********************/
+/*   FIN FORMULARIOS   */
+/***********************/
+
+/***********************/
+/*      LISTADOS       */
+/***********************/
+.contenedorListado{
+	width:100%;
+	text-align: center;
+}
+
+.listados {
+	min-width:60%; 
+	border-collapse: collapse;
+	margin: auto;
+}
+
+.listados th, .listados td{
+	border: 1px solid #838383;
+	padding: 5px 10px;
+}
+
+/* CABEZAL TABLA */
+.listados th{
+	background-color: #434343;
+	color:#FFF;
+	height: 25px;
+	font-size: 16px;
+	font-weight: normal;
+	
+}
+
+/* CELDA TABLA */
+.listados td{
+	height: 20px;
+	color:#4a4a4a;
+	font-size: 14px;
+	text-align: left;
+}
+
+/* FILAS IMPARES */	
+.listados tr:nth-child(odd){
+    background-color: #83a4da;
+}
+
+.listados tr:nth-child(odd) td{
+    color:#FFF;
+}
+ 
+/* FILAS PARES */
+.listados tr:nth-child(even){
+    background-color: #FFFFFF;
+}
+
+/***********************/
+/*    FIN LISTADOS     */
+/***********************/
+
+/***********************/
+/*       MENSJES       */
+/***********************/
+.msg_contenedor{
+	width: 100%;
+	overflow: hidden;
+	height: 100%;
+	display: block;
+}
+
+.msg_contenedor img{
+	position: relative;
+	display: block;
+	height: 50px;
+	width: 50px;
+	top: 25px;
+	left: 25px;
+}
+
+.msg_contenedor h2{
+	font-size: 30px;
+	margin: 20px 60px 20px 60px;
+	
+}
+
+.msg_contenedor label{
+	color: #000;
+	font-size: 18px;
+	margin: 10px 60px 15px 60px;
+}
+
+.msg_exito {
+	display:block;
+	margin:auto;
+	width: 70%;
+	height: 110px;
+	border-radius: 5px;
+	border: 1px solid #199211;
+	background-color: #7dc879;
+}
+
+.msg_exito h2{
+	color: #2f7b49;
+}
+
+.msg_info {
+	display:block;
+	margin:auto;
+	width: 70%;
+	height: 110px;
+	border-radius: 5px;
+	border: 1px solid #25b7d3;
+	background-color: #73d2d2;
+}
+
+.msg_info h2{
+	color: #218da5;
+}
+
+.msg_error {
+	display:block;
+	margin:auto;
+	width: 70%;
+	height: 110px;
+	border-radius: 5px;
+	border: 1px solid #d75a4a;
+	background-color: #e18f84;
+}
+
+.msg_error h2{
+	color: #c8402d;
+}
+
+/***********************/
+/*    FIN MENSJES      */
+/***********************/
+
+/***********************/
+/*    PIE DE PAGINA    */
+/***********************/
+.pie_pagina {
+    position: relative;
+    height: 50px;
+    /*margin-top: -50px;*/
+    width: 100%;
+    background-color:#3360AE;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-align: center;
+}
+
+.pie_pagina .copyright{
+	position: relative;
+  	top: 30%;
+  	color: #FFF;
+  	font-size: 12px;
+}
+
+.pie_pagina .copyright > a, .piePagina .copyright > a:VISITED {
+	color: #FFF;
+	text-decoration: none;
+}
+
+.pie_pagina .copyright > a:HOVER {
+	text-decoration: underline;
+}
+
+/***********************/
+/*  FIN PIE DE PAGINA  */
+/***********************/	

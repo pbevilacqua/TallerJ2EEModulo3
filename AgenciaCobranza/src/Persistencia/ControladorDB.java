@@ -6,11 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import DataTypes.Ticket;
+
 
 public class ControladorDB {
 
@@ -159,5 +162,55 @@ public class ControladorDB {
 			}
 		}
 		return tckNro > 0;
+	}
+	
+	public ArrayList<Ticket> obtenerVentasPorFecha(Date fechaDesde, Date fechaHasta) {
+		ArrayList<Ticket> lts = new ArrayList<Ticket>();		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = establecerConexion();
+			String selectSQL = "SELECT * FROM Ticket WHERE FchHraVenta>= ? and FchHraVenta<= ?;";
+			pstmt = con.prepareStatement(selectSQL);
+			pstmt.setTimestamp(1, new java.sql.Timestamp(fechaDesde.getTime()));
+			pstmt.setTimestamp(2, new java.sql.Timestamp(fechaHasta.getTime()));
+			rs = pstmt.executeQuery();
+
+			Ticket ticket;
+			while(rs.next()) {
+				
+				ticket = new Ticket();
+				
+				ticket.setTicketNro(rs.getInt("TicketNro"));
+				ticket.setMatricula(rs.getString("Matricula"));
+				ticket.setFchHraVenta(rs.getDate("FchHraVenta"));
+				ticket.setFchHraEst(rs.getDate("FchHraEst"));
+				ticket.setCantMin(rs.getInt("CantMin"));
+				ticket.setImpTotal(rs.getFloat("ImpTotal"));
+			    ticket.setCodAnul(rs.getInt("CodAnul")); 
+			    ticket.setFchHraAnul(rs.getDate("FchHraAnul"));
+			    ticket.setTerminalNro(rs.getInt("TerminalNro"));
+
+			    lts.add(ticket);
+			}
+			return lts;
+			
+		} catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
+
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.out.println("Ocurrio un error al liberar los recursos en Obtener Ventas por Fecha");
+				e.printStackTrace();
+			}
+
+		}
+		return lts;
 	}
 }

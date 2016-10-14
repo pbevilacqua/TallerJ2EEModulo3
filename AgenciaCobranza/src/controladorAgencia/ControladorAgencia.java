@@ -1,8 +1,11 @@
 package controladorAgencia;
 
+import java.util.ArrayList;
+import java.util.Date;
 import DataTypes.Ticket;
 import DataTypes.TicketAgencia;
 import Persistencia.ControladorDB;
+
 
 public class ControladorAgencia {
 
@@ -63,6 +66,12 @@ public class ControladorAgencia {
 			e.printStackTrace();
 		}
 		return resultado;
+
+	}
+	
+	public ArrayList<Ticket> obtenerVentasPorFecha(Date fechaDesde, Date fechaHasta ) {
+		ControladorDB cdb = ControladorDB.getControladorDB();
+		return cdb.obtenerVentasPorFecha(new java.sql.Date(fechaDesde.getTime()), new java.sql.Date(fechaHasta.getTime()));
 
 	}
 
