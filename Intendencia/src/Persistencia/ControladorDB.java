@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
@@ -320,12 +321,23 @@ public class ControladorDB {
 			while (rs.next()) {
 				ticket.setTicketNro(rs.getInt("TicketNro"));
 				ticket.setMatricula(rs.getString("Matricula"));
-				ticket.setFchHraEst(new Date(rs.getTimestamp("FchHraEst").getTime()));
-				ticket.setFchHraVenta(new Date(rs.getTimestamp("FchHraVenta").getTime()));
+				
+				Timestamp ts = rs.getTimestamp("FchHraEst");
+				if (ts != null)
+					ticket.setFchHraEst(new Date(ts.getTime()));
+				
+				ts = rs.getTimestamp("FchHraVenta");
+				if (ts != null)
+					ticket.setFchHraVenta(new Date(rs.getTimestamp("FchHraVenta").getTime()));
+				
 				ticket.setCantMin(rs.getInt("CantMin"));
 				ticket.setImpTotal(rs.getFloat("ImpTotal"));
 				ticket.setCodAnul(rs.getInt("CodAnul"));
-				ticket.setFchHraAnul(new Date(rs.getTimestamp("FchHraAnul").getTime()));
+
+				ts = rs.getTimestamp("FchHraAnul");
+				if (ts != null)
+					ticket.setFchHraAnul(new Date(rs.getTimestamp("FchHraAnul").getTime()));
+				
 				ticket.setAgenciaNro(rs.getInt("AgenciaNro"));
 				lts.add(ticket);
 				ticket = new Ticket();

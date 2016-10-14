@@ -10,5 +10,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSF 2.2 (Mojarra 2.2.0)"/>
+	<classpathentry kind="lib" path="/Users/gonzalomartinez/Downloads/primefaces-6.0.jar"/>
+	<classpathentry kind="lib" path="/Users/gonzalomartinez/Downloads/all-themes-1.0.10.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

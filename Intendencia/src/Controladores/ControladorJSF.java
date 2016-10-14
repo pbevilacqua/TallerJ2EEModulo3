@@ -6,9 +6,10 @@ import javax.faces.bean.ManagedBean;
 
 import DataTypes.Ticket;
 
-@ManagedBean
+@ManagedBean(name="controladorJSF")
 public class ControladorJSF {
     private ArrayList<Ticket> listaTickets = new ArrayList<Ticket>();
+    private float total = 0;
     
     public ControladorJSF(){
         System.out.println("Inicio");
@@ -30,4 +31,14 @@ public class ControladorJSF {
     public void setListaTicket(ArrayList<Ticket> listaTickets) {
         this.listaTickets = listaTickets;
     }
+
+	public float getTotal() {
+		return total;
+	}
+
+	public void setTotal(float total) {
+		this.total = total;
+	}
+    
+    
 }

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<h:outputScript library="js" name="jsfcrud.js" />
+</head>
+<body>
+	<h:head>
+		<f:facet name="first">
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+			<title>PrimeFaces</title>
+		</f:facet>
+	</h:head>
+	<f:view>
+		<h:form>
+			<p:dataTable value="#{controladorJSF.listaTicket}" var="item">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Número" />
+					</f:facet>
+					<h:outputText value="#{item.ticketNro}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Agencia" />
+					</f:facet>
+					<h:outputText value="#{item.agenciaNro}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Matricula" />
+					</f:facet>
+					<h:outputText value="#{item.matricula}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Estacionamiento" />
+					</f:facet>
+					<h:outputText value="#{item.fchHraEst}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Venta" />
+					</f:facet>
+					<h:outputText value="#{item.fchHraVenta}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Anulacion" />
+					</f:facet>
+					<h:outputText value="#{item.codAnul}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Fecha Anulacion" />
+					</f:facet>
+					<h:outputText value="#{item.fchHraAnul}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Importe" />
+					</f:facet>
+					<h:outputText value="#{item.impTotal}" />
+				</p:column>
+
+<!-- 				<p:summaryRow> -->
+<!-- 					<p:column colspan="3" style="text-align:right"> -->
+<!-- 						<h:outputText value="Total:" /> -->
+<!-- 					</p:column> -->
+<!-- 					<p:column> -->
+<!-- 						<h:outputText value="#{dtSummaryRowView.randomPrice}"> -->
+<!-- 							<f:convertNumber type="currency" currencySymbol="$" /> -->
+<!-- 						</h:outputText> -->
+<!-- 					</p:column> -->
+<!-- 				</p:summaryRow> -->
+			</p:dataTable>
+
+
+
+		</h:form>
+	</f:view>
+</body>
+</html>
