@@ -64,7 +64,39 @@ public class ControladorAgencia {
 		}
 		return resultado;
 
-	}
+	}	
+	
+	public boolean existeUsuario(String nombre, String contrasena){
+		boolean resultado = false;
+		try {
+			ControladorDB cdb = ControladorDB.getControladorDB();
+			if (cdb.existeUsuario(nombre, contrasena)){
+				resultado = true;			
+			}
 
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultado;
+	}
+	
+	public boolean usuarioAdministrador(String usuario){
+		boolean resultado = false;
+		try {
+			ControladorDB cdb = ControladorDB.getControladorDB();
+			int rolId = 1;
+			if (cdb.usuarioAdministrador(usuario, rolId)){
+				resultado = true;			
+			}
+
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultado;
+	}
 }
 

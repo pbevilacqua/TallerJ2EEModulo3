@@ -160,4 +160,162 @@ public class ControladorDB {
 		}
 		return tckNro > 0;
 	}
+	
+	public boolean existeUsuario(String nombre, String contrasena) {
+
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		boolean resultado = false;
+		try {
+			con = establecerConexion();
+			
+			// consulta JOIN de las tablas para obtener de una sola vez todos
+			// los datos de interes
+			
+			String insertQuery = "SELECT * FROM usuarios WHERE UsuarioNombre = ? and UsuarioContrasena = ?";
+			stmt = con.prepareStatement(insertQuery);
+
+			stmt.setString(1, nombre);
+			stmt.setString(2, contrasena);
+			rs = stmt.executeQuery();
+			
+
+			if (rs.next()) {
+
+				resultado = true;
+			}
+			else{
+				resultado = false;
+			}
+
+
+		} catch (SQLException e) {
+			System.out.println("SQLException: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
+
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (stmt != null)
+					stmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.out
+						.println("Ocurrio un error al liberar los recursos luego de consultar si Existe Usuario");
+				e.printStackTrace();
+			}
+
+		}
+		return resultado;
+
+	}
+	
+	public boolean usuarioAdministrador(String usuario, int rolId) {
+
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		boolean resultado = false;
+		try {
+			con = establecerConexion();
+			
+			// consulta JOIN de las tablas para obtener de una sola vez todos
+			// los datos de interes
+			
+			String insertQuery = "SELECT * FROM usuariorol WHERE UsuarioNombre = ? and RolId = ?";
+			stmt = con.prepareStatement(insertQuery);
+
+			stmt.setString(1, usuario);
+			stmt.setInt(2, rolId);
+			rs = stmt.executeQuery();
+			
+
+			if (rs.next()) {
+
+				resultado = true;
+			}
+			else{
+				resultado = false;
+			}
+
+
+		} catch (SQLException e) {
+			System.out.println("SQLException: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
+
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (stmt != null)
+					stmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.out
+						.println("Ocurrio un error al liberar los recursos luego de consultar si Usuario Administrador");
+				e.printStackTrace();
+			}
+
+		}
+		return resultado;
+	}
+	
+	public boolean usuarioTerminal(String usuario, int rolId, int terminal) {
+
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		boolean resultado = false;
+		try {
+			con = establecerConexion();
+			
+			// consulta JOIN de las tablas para obtener de una sola vez todos
+			// los datos de interes
+			
+			String insertQuery = "SELECT * FROM usuariorolterminal WHERE UsuarioNombre = ? and RolId = ? and TerminalId = ?";
+			stmt = con.prepareStatement(insertQuery);
+
+			stmt.setString(1, usuario);
+			stmt.setInt(2, rolId);
+			stmt.setInt(3, terminal);
+			rs = stmt.executeQuery();
+			
+
+			if (rs.next()) {
+
+				resultado = true;
+			}
+			else{
+				resultado = false;
+			}
+
+
+		} catch (SQLException e) {
+			System.out.println("SQLException: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
+
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (stmt != null)
+					stmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.out
+						.println("Ocurrio un error al liberar los recursos luego de consultar si Usuario Administrador Terminal");
+				e.printStackTrace();
+			}
+
+		}
+		return resultado;
+	}
 }
