@@ -106,19 +106,33 @@
 						  Iterator<Ticket> it = tickets.iterator();
 						  
 						  while(it.hasNext()){
-								Ticket ticket = (Ticket)it.next();		
-								//SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-								//Date pfhv = df..parse(ticket.getFchHraVenta().toString());
+								Ticket ticket = (Ticket)it.next();	
+								
+								DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+								String fhv = "";
+								String fhe = "";
+								String fha = "";
+								
+								if (ticket.getFchHraVenta() != null){
+									fhv = df.format(ticket.getFchHraVenta());
+								}
+								if (ticket.getFchHraEst() != null){
+									fhe = df.format(ticket.getFchHraEst());
+								}
+								if  (ticket.getFchHraAnul() != null){
+								    fha = df.format(ticket.getFchHraAnul());
+								}
+								
 							%>
 							<tr>
 								<td><%= ticket.getTicketNro()%></td>
 								<td><%= ticket.getMatricula()%></td>
-								<td><%= ticket.getFchHraVenta()%></td>
-								<td><%= ticket.getFchHraEst()%></td>
-								<td><%= ticket.getCantMin() %></td>
+								<td><%= fhv%></td>
+								<td><%= fhe%></td>
+								<td><%= ticket.getCantMin()%></td>
 								<td><%= ticket.getImpTotal()%></td>
-								<td><%= ticket.getCodAnul() %></td>
-								<td><%= ticket.getFchHraAnul() %></td>
+								<td><%= ticket.getCodAnul()%></td>
+								<td><%= fha%></td>
 								<td><%= ticket.getTerminalNro() %></td>
 							</tr>
 
