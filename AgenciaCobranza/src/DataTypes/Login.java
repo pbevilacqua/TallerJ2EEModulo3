@@ -1,4 +1,5 @@
-package presentacion;
+package DataTypes;
+
 
 public class Login {
 	private String usuario;
