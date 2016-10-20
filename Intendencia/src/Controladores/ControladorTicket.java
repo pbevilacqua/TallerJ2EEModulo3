@@ -84,5 +84,21 @@ public class ControladorTicket {
 		
 		return lts;
 	}
+	
+	public boolean existeUsuario(String nombre, String contrasena){
+		boolean resultado = false;
+		try {
+			ControladorDB cdb = ControladorDB.getControladorDB();
+			if (cdb.existeUsuario(nombre, contrasena)){
+				resultado = true;			
+			}
+
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultado;
+	}
 
 }

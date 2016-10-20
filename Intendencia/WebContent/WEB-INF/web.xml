@@ -38,4 +38,12 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+	<filter>
+		<filter-name>filtroseguridad</filter-name>
+		<filter-class>Filtros.Filtro</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>filtroseguridad</filter-name>
+		<url-pattern>/Reportes/*</url-pattern>
+	</filter-mapping>
 </web-app>

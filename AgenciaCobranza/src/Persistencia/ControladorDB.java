@@ -184,12 +184,12 @@ public class ControladorDB {
 				
 				ticket.setTicketNro(rs.getInt("TicketNro"));
 				ticket.setMatricula(rs.getString("Matricula"));
-				ticket.setFchHraVenta(rs.getDate("FchHraVenta"));
-				ticket.setFchHraEst(rs.getDate("FchHraEst"));
+				ticket.setFchHraVenta(rs.getTimestamp("FchHraVenta"));
+				ticket.setFchHraEst(rs.getTimestamp("FchHraEst"));
 				ticket.setCantMin(rs.getInt("CantMin"));
 				ticket.setImpTotal(rs.getFloat("ImpTotal"));
 			    ticket.setCodAnul(rs.getInt("CodAnul")); 
-			    ticket.setFchHraAnul(rs.getDate("FchHraAnul"));
+			    ticket.setFchHraAnul(rs.getTimestamp("FchHraAnul"));
 			    ticket.setTerminalNro(rs.getInt("TerminalNro"));
 
 			    lts.add(ticket);

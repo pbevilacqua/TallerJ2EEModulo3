@@ -6,9 +6,11 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title><ui:insert name="title">Default Title</ui:insert></title>
+    <ui:insert name ="head">
+        <title><ui:insert name="title">Default Title</ui:insert></title></ui:insert>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputScript library="js" name="jsfcrud.js"/>
+        
     </h:head>
 
     <h:body>
@@ -18,18 +20,20 @@
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="65" header="IMM">
             </p:layoutUnit>
-
+            
+            <ui:insert name = "menutemplate">
             <p:layoutUnit position="west" size="175" header="" collapsible="true">
                 <h:form id="menuForm">
                     <p:menu >
                         <p:submenu label="Reportes" >
                             <p:menuitem outcome="/Reportes/ListarTicket.xhtml" value="Por Fecha" />
-
                         </p:submenu>
+                        <p:menuitem action="#{controladorTemplate.salir}" value="Salir" />
 
                     </p:menu>
                 </h:form>
             </p:layoutUnit>
+            </ui:insert>
 
 <!--             <p:layoutUnit position="south" size="60"> -->
 <!--                 <ui:insert name="footer"/> -->

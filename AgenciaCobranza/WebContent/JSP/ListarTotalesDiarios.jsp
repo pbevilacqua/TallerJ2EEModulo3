@@ -50,18 +50,31 @@
 		      String paramValue = request.getParameter(paramName);
 		      System.out.println(paramValue);
 		   }		
+	
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		
+		//Inicializo las fechas por defecto
+		Date fechaHasta = new Date();
+        Calendar calendar = Calendar.getInstance();			 
+        calendar.setTime(fechaHasta); 			 
+        calendar.add(Calendar.DAY_OF_YEAR, -1); 					
+        Date fechaDesde = calendar.getTime();	
 		
 		if(request.getMethod().equals("POST")){
+			//Me fijo si debo volver a cargar los valores que tenía en pantalla
 			fd = (String)request.getParameter("fechaDesde");
 			fh = (String)request.getParameter("fechaHasta");
 			
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-			
-			Date fechaDesde = formatter.parse(fd);
-			Date fechaHasta = formatter.parse(fh);
+			fechaDesde = fd != null? formatter.parse(fd) : fechaDesde;
+			fechaHasta = fh != null? formatter.parse(fh) : fechaHasta;
 			ControladorAgencia ca = new ControladorAgencia();
 			tickets = ca.obtenerVentasPorFecha(fechaDesde, fechaHasta);
 		}
+		
+		//Vuelvo a setear por si fueron corregidas dentro del if
+		fd = formatter.format(fechaDesde);
+		fh = formatter.format(fechaHasta);
+			
 	
 	%>
 	<div class="cuerpo">
