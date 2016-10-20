@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DataTypes.Login;
+import DataTypes.Mensaje;
+import DataTypes.TipoMensaje;
+import DataTypes.Usuario;
 import controladorAgencia.ControladorAgencia;
 
 /**
@@ -49,7 +52,7 @@ public class ServletLogin extends HttpServlet {
 		}
 		//Iterator itr = config.getInitParameterNames();
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -57,21 +60,44 @@ public class ServletLogin extends HttpServlet {
 		// TODO Auto-generated method stub
 		String usuario = request.getParameter("usuario");
 		String pass = request.getParameter("pass");
+		
+		Usuario user = new Usuario();
+		user.setUser(usuario);
+		user.setPassword(pass);
 		String texto;
-		ControladorAgencia ca =  new ControladorAgencia();
-		if (ca.existeUsuario(usuario, pass)){	
-			HttpSession session = request.getSession(); 
-			Login login = new Login();
-			login.setUsuario(usuario);
-			session.setAttribute("login", login);
-			texto = "<html><body><h1>Bienvenid@ " + usuario+"!!</h1></body></html>";
-			request.getRequestDispatcher("/Peliculas/ListarPeliculas.jsp").forward(request, response);	
-			
-		}
-		else
-		{
-			texto = "<html><body><h1>Usuario y/o contraseña incorrecta!!</h1></body></html>";
-			response.getWriter().print(texto);	
+		
+		ControladorAgencia ca = new ControladorAgencia();
+		
+		//if (usrPass.containsKey(usuario) && usrPass.get(usuario).equals(pass)){
+		try {
+			if (ca.existeUsuario(usuario, pass)){
+				if(ca.usuarioAdministrador(usuario)){
+				HttpSession session = request.getSession(true); 
+					Login login = new Login();
+					login.setUsuario(usuario);
+					session.setAttribute("login", login);
+					// texto = "<html><body><h1>Bienvenid@ " +
+					// usuario+"!!</h1></body></html>";
+					request.getRequestDispatcher("/JSP/ListarTotalesDiarios.jsp").forward(request, response);
+				}
+				else
+				{
+					Mensaje msg = new Mensaje("Usuario no es Administrador!!", TipoMensaje.ERROR);				
+					request.setAttribute("mensaje", msg);				
+					request.getRequestDispatcher("/JSP/Mensajes.jsp").forward(request, response);
+				}
+				
+			}
+			else
+			{
+				Mensaje msg = new Mensaje("Usuario y/o contraseña incorrecta!!", TipoMensaje.ERROR);				
+				request.setAttribute("mensaje", msg);				
+				request.getRequestDispatcher("/JSP/Mensajes.jsp").forward(request, response);	
+				//response.getWriter().print(texto);	
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		

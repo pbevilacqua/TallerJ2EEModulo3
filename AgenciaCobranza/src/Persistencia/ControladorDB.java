@@ -226,7 +226,7 @@ public class ControladorDB {
 			// consulta JOIN de las tablas para obtener de una sola vez todos
 			// los datos de interes
 			
-			String insertQuery = "SELECT * FROM usuarios WHERE UsuarioNombre = ? and UsuarioContrasena = ?";
+			String insertQuery = "SELECT * FROM usuario WHERE UsuarioNombre = ? and UsuarioContrasena = ?";
 			stmt = con.prepareStatement(insertQuery);
 
 			stmt.setString(1, nombre);
