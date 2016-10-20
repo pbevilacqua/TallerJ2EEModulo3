@@ -117,7 +117,8 @@ public class ProcesarMensaje {
 					}
 
 				}
-			}	        	
+			}	
+			
 		} catch (Exception ex) {
 			Logger.getLogger(ProcesarMensaje.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -127,7 +128,38 @@ public class ProcesarMensaje {
 	}
 
 
+	public String Login(String usuario, String contraseña){
+		
+		String msg;
 
+		msg = "Login|"+usuario+"|"+contraseña;
+		socketClient sc= socketClient.getInstance();
+		String mensaje = sc.enviarMensaje(msg);
+		String comando = null;
+		
+		try {
+			if (mensaje!= null){
+				StringTokenizer st = new StringTokenizer(mensaje,"|");
+				comando =  st.nextToken();
+				if (comando.equals("Login") || comando.equals("Error")){
+
+					comando =  st.nextToken();				
+
+					System.out.println("Info de la respuesta de Login");
+					System.out.println(comando);				  				
+
+				}	
+			}	
+			
+		} catch (Exception ex) {
+			Logger.getLogger(ProcesarMensaje.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		
+		
+		return comando;
+	}
+	
+	
 	public boolean isNumber(String n) {
 		try {
 			Integer.parseInt(n);
