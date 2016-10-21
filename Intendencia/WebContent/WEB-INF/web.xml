@@ -46,4 +46,15 @@
 		<filter-name>filtroseguridad</filter-name>
 		<url-pattern>/Reportes/*</url-pattern>
 	</filter-mapping>
+	<context-param>
+		<param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>com.sun.faces.enableRestoreView11Compatibility</param-name>
+		<param-value>true</param-value>
+	</context-param>
+       <welcome-file-list>
+             <welcome-file>/Login/Login.xhtml</welcome-file>
+       </welcome-file-list>
 </web-app>

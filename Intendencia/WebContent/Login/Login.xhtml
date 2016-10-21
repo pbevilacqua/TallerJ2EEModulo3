@@ -15,7 +15,10 @@
 	</ui:define>
 	<ui:define name="menutemplate" />
 	<ui:define name="body">
-
+		<f:metadata>
+			<f:event type="preRenderView" listener="#{controladorLogin.controlCarga}" />
+		</f:metadata>
+		
 		<h:form>
 			<h:panelGrid columns="2" cellpadding="5">
 
@@ -23,8 +26,7 @@
 				<p:inputText id="usuario" value="#{controladorLogin.usuario}"
 					required="true" requiredMessage="Debe ingresar un usuario" />
 				<p:outputLabel for="contraseña" value="Contraseña:" />
-				<p:password id="contraseña" value="#{controladorLogin.contraseña}"
-					binding="#{controladorLogin.password}" feedback="false"
+				<p:password id="contraseña" value="#{controladorLogin.contraseña}" feedback="false"
 					required="true" requiredMessage="Debe ingresar una contraseña" />
 <!-- 				<h:commandButton value="Login" action="#{controladorLogin.accion()}"
 					update="@form" /> -->

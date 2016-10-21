@@ -1,11 +1,13 @@
 package Controladores;
 
+import java.io.IOException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.primefaces.component.password.Password;
 
 import DataTypes.Login;
 
@@ -14,13 +16,7 @@ public class controladorLogin {
 	
 	private String usuario;
 	private String contraseña;
-	private Password password;
-	public Password getPassword() {
-		return password;
-	}
-	public void setPassword(Password password) {
-		this.password = password;
-	}
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -33,6 +29,14 @@ public class controladorLogin {
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
+	
+	
+	public void controlCarga() throws IOException, ServletException{
+		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		if(request.getMethod().equals("GET")){
+			request.getSession(true);
+		}
+	}	
 	
 	public String accion(){
 		ControladorTicket ct = new ControladorTicket();

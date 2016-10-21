@@ -1,14 +1,13 @@
 package Persistencia;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.List;
-import java.sql.Date;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -163,7 +162,8 @@ public class ControladorDB {
 							pstmt.setInt(3, ticket.getTicketNro());
 							pstmt.setInt(4, ticket.getAgenciaNro());
 
-							int i = pstmt.executeUpdate();
+							//int i = pstmt.executeUpdate();
+							pstmt.executeUpdate();
 
 							ticket.setFchHraAnul(fchHraAnul);
 							ticket.setCodAnul(codAnul);
@@ -307,7 +307,7 @@ public class ControladorDB {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ArrayList<Ticket> lts = new ArrayList<Ticket>();
-		int tckNro = 0;
+		//int tckNro = 0;
 		try {
 			con = establecerConexion();
 
