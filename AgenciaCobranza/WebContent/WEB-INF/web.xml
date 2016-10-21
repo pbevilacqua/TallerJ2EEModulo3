@@ -20,6 +20,14 @@
 		<servlet-name>Servlet_de_Login</servlet-name>
 		<url-pattern>/ServletLogin</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>Servlet_de_Cierre</servlet-name>
+		<servlet-class>Servlet.ServletCerrarSesion</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Servlet_de_Cierre</servlet-name>
+		<url-pattern>/ServletCerrarSesion</url-pattern>
+	</servlet-mapping>
 <!-- 	<filter> -->
 <!-- 		<filter-name>FiltroLogin</filter-name> -->
 <!-- 		<filter-class>filtros.FiltroLogin</filter-class> -->

@@ -111,6 +111,25 @@ public class ControladorAgencia {
 		return resultado;
 	}
 	
+	public boolean usuarioTerminal(String usuario){
+		boolean resultado = false;
+		try {
+			ControladorDB cdb = ControladorDB.getControladorDB();
+			int rolId = 2;
+			int terminal = 1;
+			if (cdb.usuarioTerminal(usuario, rolId, terminal)){
+				resultado = true;			
+			}
+
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultado;
+	}
+	
+	
 	
 	
 }
