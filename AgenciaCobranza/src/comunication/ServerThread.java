@@ -99,7 +99,7 @@ public class ServerThread extends Thread {
 						
 						if (ca.usuarioTerminal(usuario)){
 							
-							mensaje = "Login|Bienvenido "+usuario;
+							mensaje = "OK";
 						}
 						else{
 							mensaje = "Error|Usuario no habilitado para ingresar a la terminal";

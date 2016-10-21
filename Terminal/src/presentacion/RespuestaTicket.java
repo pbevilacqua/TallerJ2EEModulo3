@@ -41,6 +41,13 @@ public class RespuestaTicket
 
  }
  
+ public static void infoLogin(String mensaje, int tipoMsg, RespuestaLogin icon)
+ {
+	  JOptionPane.showMessageDialog(null, mensaje, "Login de Usuario", tipoMsg, icon);
+	 
+
+ }
+ 
   
 }
  
