@@ -12,17 +12,13 @@ import javax.swing.JToolBar;
 public class TerminalPrincipal {
  
     JPanel jp_principal;
-    JButton jb_compraTicket, jb_anulaTicket;   
-    JToolBar tb;
-    ImageIcon imi_compraTicket, imi_anulaTicket;
-    public JPanel jp_compra_ticket, jp_anula_ticket;
-    
+   
     
     public TerminalPrincipal(){
  
         JFrame jfM = new JFrame("Terminal Agencia Cobranza");  
         jfM.setLayout(null);
-        bordJP(); //invoca el metodo que contiene el panel
+        jp_principal = JPanelPrincipal.getInstance();
         jp_principal.setBounds(10, 10, 780, 680);
         jfM.add(jp_principal); 
         jfM.setLocation(100, 50);
@@ -31,75 +27,6 @@ public class TerminalPrincipal {
         jfM.setSize(800, 700);
         jfM.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-    public void bordJP(){
-    	jp_principal = new JPanel(new BorderLayout(2, 3));
-   	
-        imi_compraTicket= new ImageIcon("iconos\\parking.png");
-        imi_anulaTicket = new ImageIcon("iconos\\anularTicket.png");
-        
-        jb_compraTicket = new JButton(imi_compraTicket);
-        jb_anulaTicket = new JButton(imi_anulaTicket);
-
- 
-        tb = new JToolBar();
-        tb.add(jb_compraTicket);
-        tb.add(jb_anulaTicket);
-        
-
-        
-        jp_principal.add(tb, BorderLayout.NORTH);
-        jp_principal.setVisible(true);
-        
-        
-        
-        // ActionListener CompraTicket
-        jb_compraTicket.addActionListener(new ActionListener() {
-        	
-            @Override
-            public void actionPerformed(ActionEvent event) {
-
-            	jp_principal.removeAll();
-            	jp_principal.setLayout(new BorderLayout(2, 3));
-            	jp_principal.add(tb, BorderLayout.NORTH); //boton al panel norte
-            	
-            	jp_compra_ticket = JPanelCompraTicket.getInstance();//Singleton del panel de Compra Ticket
-            	jp_principal.add(jp_compra_ticket);
-            	
-
-        		jp_principal.revalidate();
-        		jp_principal.repaint();
-        		
-            }
-
-        });
-        jp_principal.setVisible(true);    
-        
-        
-     // ActionListener AnulaTicket
-        jb_anulaTicket.addActionListener(new ActionListener() {
-        	
-            @Override
-            public void actionPerformed(ActionEvent event) {
-
-            	jp_principal.removeAll();
-            	jp_principal.setLayout(new BorderLayout(2, 3));
-            	jp_principal.add(tb, BorderLayout.NORTH); //boton al panel norte
-            	
-            	jp_anula_ticket = JPanelAnulaTicket.getInstance();//Singleton del panel de Anula Ticket
-            	jp_principal.add(jp_anula_ticket);
-            	
-
-        		jp_principal.revalidate();
-        		jp_principal.repaint();
-        		
-            }
-
-        });
-        jp_principal.setVisible(true);    
-        
-    }
- 
 
 	public static void main(String[] args) {
     	

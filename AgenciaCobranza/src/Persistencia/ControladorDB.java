@@ -331,7 +331,7 @@ public class ControladorDB {
 			// consulta JOIN de las tablas para obtener de una sola vez todos
 			// los datos de interes
 			
-			String insertQuery = "SELECT * FROM usuariorolterminal WHERE UsuarioNombre = ? and RolId = ? and TerminalId = ?";
+			String insertQuery = "SELECT * FROM usuariorolterminal WHERE UsuarioNombre = ? and RolId = ? and TerminalNro = ?";
 			stmt = con.prepareStatement(insertQuery);
 
 			stmt.setString(1, usuario);

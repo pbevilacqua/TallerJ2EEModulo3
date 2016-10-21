@@ -99,7 +99,6 @@ public class JPanelCompraTicket extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				String msg;
 				ProcesarMensaje pm = ProcesarMensaje.getProcesarMensaje();			
 
 
