@@ -53,6 +53,4 @@ public class controladorLogin {
 			return null;
 		}
 	}
-	
-	
 }
